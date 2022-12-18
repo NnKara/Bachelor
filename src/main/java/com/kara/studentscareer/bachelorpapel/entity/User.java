@@ -1,13 +1,14 @@
 package com.kara.studentscareer.bachelorpapel.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,15 +24,11 @@ public class User {
     private Integer userId;
 
 
-    @Column(name = "UserName",unique = true)
+    @Column(name = "username",unique = true)
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
     @Size(max = 50)
     private String username;
 
-    @Column(name="Email",unique = true)
-    @NotBlank(message="*Το πεδίο είναι υποχρεωτικό")
-    @Size(max=50)
-    private String email;
 
     @Column(name = "Password",unique = true)
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
@@ -72,20 +69,32 @@ public class User {
     @ToString.Exclude
     private List<Address> addresses;
 
-
-
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles ;
 
-    public void addRole(Role role) {
-        this.roles.add(role);
+    public <T> User(Collection<Education> educations, String username, String password, String firstname, String lastname, List<Phone> phones, List<Experience> experiences, List<Email> emails, List<T> role) {
+
+    }
+
+    public <T> User(String firstname, String username, String password, String lastname, List<T> role) {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User that = (User) o;
+        return userId != null && Objects.equals(userId, that.userId);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
