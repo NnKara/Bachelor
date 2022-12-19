@@ -2,10 +2,11 @@ package com.kara.studentscareer.bachelorpapel.service;
 
 import com.kara.studentscareer.bachelorpapel.dto.UserDto;
 import com.kara.studentscareer.bachelorpapel.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     User save(UserDto userDto);
 

@@ -1,4 +1,4 @@
-package com.kara.studentscareer.bachelorpapel.enums.converter;
+package com.kara.studentscareer.bachelorpapel.converter;
 
 import com.kara.studentscareer.bachelorpapel.dto.UserDto;
 import com.kara.studentscareer.bachelorpapel.entity.User;

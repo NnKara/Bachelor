@@ -17,6 +17,7 @@ public class AdminController {
 
 
 
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public List<UserDto> getAllUsers(){
         return userService.findAllUsers();
