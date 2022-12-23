@@ -1,11 +1,18 @@
 package com.kara.studentscareer.bachelorpapel.controller;
 
+import com.kara.studentscareer.bachelorpapel.converter.UserConverter;
 import com.kara.studentscareer.bachelorpapel.dto.UserDto;
 import com.kara.studentscareer.bachelorpapel.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -15,22 +22,33 @@ public class UserRegistrationController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private UserConverter userConverter;
 
 
-    @ModelAttribute("user")
-    public UserDto userRegistrationDto() {
-        return new UserDto();
-    }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user",userRegistrationDto());
+    public String showRegistrationForm(@ModelAttribute UserDto userDto, Model model) {
+        model.addAttribute("user", userDto);
         return "registration";
     }
 
+
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
-        userService.save(userDto);
-        return "redirect:/registration?success";
+    public String registerUserAccount(@Valid UserDto userDto, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            return "registration";
+        }
+       userService.save(userDto);
+        return "login";
     }
+
+
+
+
+
+
+
+
+
 }

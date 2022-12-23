@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="utf-8">
     <title>Registration</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -22,7 +22,7 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">User Registration Form</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">"Πανεπιστήμιο Πελλοπονήσου"</a>
         </div>
     </div>
 </nav>
@@ -42,35 +42,42 @@
 
             <h1>Registration</h1>
 
-            <form th:action="@{/registration}" method="post" th:object="${user}">
+            <form   th:action="@{/registration}" method="post" class="form" th:object="${user}">
                 <div class="form-group">
-                    <label class="control-label" for="firstname"> First Name </label>
-                    <input id="firstname" class="form-control" th:field="*{firstname}"
+                    <label  class="control-label" for="firstname"> First Name </label>
+                    <input type="text" id="firstname" class="form-control"  th:field="*{firstname}" placeholder="Enter First Name"
                            required autofocus="autofocus"/>
                 </div>
 
+
                 <div class="form-group">
                     <label class="control-label" for="lastname"> Last Name </label> <input
-                        id="lastname" class="form-control" th:field="*{lastname}"
+                       type="text" id="lastname" class="form-control" th:field="*{lastname}"  placeholder="Enter Last Name"
                         required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="username"> Username </label> <input
-                        id="username" class="form-control" th:field="*{username}" required
+                    <label class="control-label" for="username"> Username </label>
+                    <input
+                       type="text" id="username" class="form-control" th:field="*{username}"   required placeholder="Enter Username"
                         autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="password"> Password </label> <input
-                        id="password" class="form-control" type="password"
+                    <label class="control-label" for="password"> Password </label>
+                    <input
+                       id="password" class="form-control" type="password" placeholder="Enter password"
                         th:field="*{password}" required autofocus="autofocus"/>
                 </div>
+<!--                <div class="form-group">-->
+<!--                    <label class="control-label" for="confirmPassword"> *Password </label>-->
+<!--                    <input type="password" id="confirmPassword" class="form-control" th:field="*{confirmPassword}"  placeholder="Re-Enter Password"-->
+<!--                        required autofocus="autofocus"/>-->
+<!--                    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="confirmaPassword" class="invalid-feedback"></div>-->
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
+                    <button  type="submit"  class="btn btn-success">Register</button>
+                    <span>Already have an account? <a href="/" th:href="@{/login}">Login here</a></span>
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
@@ -25,25 +25,28 @@ public class User {
 
 
     @Column(name = "username",unique = true)
-    @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    @Size(max = 50)
+    @NotEmpty(message = "Το πεδίο είναι υποχρεωτικό!")
+    @Size(min=2,max=10,message = "Το πεδίο πρέπει να περιέχει 2-10 χαρακτήρες!")
     private String username;
 
 
     @Column(name = "Password",unique = true)
-    @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    @Size(max = 120)
+    @NotEmpty(message = "*Το πεδίο είναι υποχρεωτικό!")
+    @Size(min=2,max=15,message = "Το πεδίο πρέχει να περιέχει 2-15 χαρακτήρες ")
     private String password;
 
     @Column(name = "FirstName")
-    @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    @Size(max = 50)
+    @NotEmpty(message = "*Το πεδίο είναι υποχρεωτικό")
+    @Size(min = 2,max = 15)
     private String firstname;
 
     @Column(name = "LastName")
-    @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    @Size(max = 50)
+    @NotEmpty(message = "*Το πεδίο είναι υποχρεωτικό")
+    @Size(min = 2,max = 15)
     private String lastname;
+
+//    @Transient
+//    private String confirmPassword;
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

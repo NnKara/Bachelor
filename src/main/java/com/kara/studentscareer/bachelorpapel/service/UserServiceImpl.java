@@ -1,8 +1,8 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Role;
 import com.kara.studentscareer.bachelorpapel.converter.UserConverter;
 import com.kara.studentscareer.bachelorpapel.dto.UserDto;
+import com.kara.studentscareer.bachelorpapel.entity.Role;
 import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,6 +36,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(UserDto userDto) {
         User newUser = userConverter.dtoToEntity(userDto);
+        if(newUser.equals(userRepository.findByUsername(userDto.getUsername()))){
+            throw new EntityExistsException("This user already exists!");
+        }
         newUser.setRoles(Arrays.asList(new Role("ROLE_USER")));
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(newUser);
@@ -47,12 +51,9 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username or password");
         }
         return new org.springframework.security.core.userdetails.User(userFromDB.getUsername(), userFromDB.getPassword(), mapRolesToAuthorities(userFromDB.getRoles()));
-        //user object apo to spring security kai tou exw kanei map ta roles me ta authorities pou xreiazetai!!!!!
-
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {  //convert role SimpleGrantAuthority kai kanw pass to rolename se auto
-
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
@@ -82,52 +83,58 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(User updatedUser) {
-        User userFromDB = userRepository.findByUsername(updatedUser.getUsername());
+    public User updateUser(UserDto updatedUserDto) {
+        User userFromDB = userRepository.findByUsername(updatedUserDto.getUsername());
         if (userFromDB == null) {
-            throw new EntityNotFoundException("There is no User with this Username: " + updatedUser.getUsername());
+            throw new EntityNotFoundException("There is no User with this Username: " + updatedUserDto.getUsername());
         }
-        if (updatedUser.getFirstname() != null) {
-            userFromDB.setFirstname(updatedUser.getFirstname());
+        if (updatedUserDto.getFirstname() != null) {
+            userFromDB.setFirstname(updatedUserDto.getFirstname());
+        }else {
+            userFromDB.setFirstname(userFromDB.getFirstname());
         }
-        if (updatedUser.getLastname() != null) {
-            userFromDB.setLastname(updatedUser.getLastname());
+        if (updatedUserDto.getLastname() != null) {
+            userFromDB.setLastname(updatedUserDto.getLastname());
+        }else{
+            userFromDB.setLastname(userFromDB.getLastname());
         }
-        if (updatedUser.getUsername() != null) {
-            userFromDB.setUsername(updatedUser.getUsername());
+        if (updatedUserDto.getUsername() != null) {
+            userFromDB.setUsername(updatedUserDto.getUsername());
+        }else{
+            userFromDB.setUsername(userFromDB.getUsername());
         }
-        if (updatedUser.getAddresses() != null) {
-            userFromDB.setAddresses(updatedUser.getAddresses().stream().map(e -> {
+        if (updatedUserDto.getAddresses() != null) {
+            userFromDB.setAddresses(updatedUserDto.getAddresses().stream().map(e -> {
                 e.setUser(userFromDB);
                 return e;
             }).collect(Collectors.toList()));
         }
-        if (updatedUser.getEducations() != null) {
-            userFromDB.setEducations(updatedUser.getEducations().stream().map(ed -> {
+        if (updatedUserDto.getEducations() != null) {
+            userFromDB.setEducations(updatedUserDto.getEducations().stream().map(ed -> {
                 ed.setUser(userFromDB);
                 return ed;
             }).collect(Collectors.toList()));
         }
-        if (updatedUser.getEmails() != null) {
-            userFromDB.setEmails(updatedUser.getEmails().stream().map(e -> {
+        if (updatedUserDto.getEmails() != null) {
+            userFromDB.setEmails(updatedUserDto.getEmails().stream().map(e -> {
                 e.setUser(userFromDB);
                 return e;
             }).collect(Collectors.toList()));
         }
-        if (updatedUser.getEducations() != null) {
-            userFromDB.setEducations(updatedUser.getEducations().stream().map(ex -> {
+        if (updatedUserDto.getEducations() != null) {
+            userFromDB.setEducations(updatedUserDto.getEducations().stream().map(ex -> {
                 ex.setUser(userFromDB);
                 return ex;
             }).collect(Collectors.toList()));
         }
-        if (updatedUser.getPhones() != null) {
-            userFromDB.setPhones(updatedUser.getPhones().stream().map(p -> {
+        if (updatedUserDto.getPhones() != null) {
+            userFromDB.setPhones(updatedUserDto.getPhones().stream().map(p -> {
                 p.setUser(userFromDB);
                 return p;
             }).collect(Collectors.toList()));
         }
         userRepository.save(userFromDB);
-        return userConverter.entityToDto(userFromDB);
+        return userConverter.dtoToEntity(updatedUserDto);
 
     }
 

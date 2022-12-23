@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
     UserDto findUserById(Integer id);
 
     UserDto findByUsername(String username);
-    UserDto updateUser(User updatedUser);
+    User updateUser(UserDto updatedUserDto);
 
     void deleteUserById(Integer id);
 
