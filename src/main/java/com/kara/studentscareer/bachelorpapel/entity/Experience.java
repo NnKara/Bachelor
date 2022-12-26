@@ -1,11 +1,10 @@
 package com.kara.studentscareer.bachelorpapel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

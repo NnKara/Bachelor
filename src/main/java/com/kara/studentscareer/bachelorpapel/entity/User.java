@@ -1,11 +1,12 @@
 package com.kara.studentscareer.bachelorpapel.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-public class User {
+public class User  {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +47,8 @@ public class User {
     @Size(min = 2,max = 15)
     private String lastname;
 
-//    @Transient
-//    private String confirmPassword;
+    @Transient
+    private String confirmPassword;
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -78,7 +80,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Collection<Role> roles ;
+    private List<Role> roles=new ArrayList<>() ;
 
     public <T> User(Collection<Education> educations, String username, String password, String firstname, String lastname, List<Phone> phones, List<Experience> experiences, List<Email> emails, List<T> role) {
 

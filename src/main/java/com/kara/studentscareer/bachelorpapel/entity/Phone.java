@@ -2,9 +2,8 @@ package com.kara.studentscareer.bachelorpapel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kara.studentscareer.bachelorpapel.enums.PhoneType;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Getter
 @Setter

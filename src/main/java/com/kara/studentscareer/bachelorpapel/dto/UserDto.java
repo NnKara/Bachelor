@@ -1,6 +1,5 @@
 package com.kara.studentscareer.bachelorpapel.dto;
 
-import com.kara.studentscareer.bachelorpapel.entity.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,18 +33,21 @@ public class UserDto {
     private String lastname;
 
     @javax.validation.constraints.Email(regexp = "^(.+)@(.+)$",message = "Invalid Email pattern!")
-    private List<Email> emails;
+    private List<EmailDto> emails;
 
     @Size(min=2,max=30,message = "Το πεδίο είναι υποχρεωτικό!")
-    private List<Education> educations;
+    private List<EducationDto> educations;
 
     @Pattern(regexp = "[7-9][0-9]{9}",message = "Invalid Mobile Number!")
     @Size(max=10,message = "Digits should be 10!")
-    private List<Phone> phones;
+    private List<PhoneDto> phones;
 
     @Size(min=2,max=30,message = "Το πεδίο είναι υποχρεωτικό!")
-    private List<Experience> experiences;
+    private List<ExperienceDto> experiences;
 
-    private List<Address> addresses;
+
+    private List<AddressDto> addresses;
+
+    private StudentInfoDto studentInfo;
 
 }

@@ -26,28 +26,38 @@ public class UserRegistrationController {
     private UserConverter userConverter;
 
 
+    //handler method to handle home page request
+
+
+    //handler method to handle user registration form request
 
     @GetMapping
-    public String showRegistrationForm(@ModelAttribute UserDto userDto, Model model) {
+    public String showRegistrationForm( Model model) {
+        UserDto userDto=new UserDto();
         model.addAttribute("user", userDto);
         return "registration";
     }
 
 
     @PostMapping
-    public String registerUserAccount(@Valid UserDto userDto, BindingResult result, Model model) {
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+        UserDto existingUser=userService.findByUsername(userDto.getUsername());
+        if(existingUser!=null){
+            result.rejectValue("username","There is already an account registered with that username");
+        }
         if(result.hasErrors()){
             return "registration";
         }
-       userService.save(userDto);
+        userService.save(userDto);
         return "login";
     }
 
-
-
-
-
-
+    @GetMapping("/user")
+    public String getUser(UserDto userDto,Model model){
+        UserDto user=userService.findByUsername(userDto.getUsername());
+        model.addAttribute("homePage",user);
+        return "homePage";
+    }
 
 
 

@@ -23,10 +23,10 @@ public class AdminController {
         return userService.findAllUsers();
     }
 
-    @GetMapping("/find/user/{id}")
-    public UserDto findUserByID(@PathVariable(name = "id") Integer id){
-      return   userService.findUserById(id);
-    }
+//    @GetMapping("/find/user/{id}")
+//    public UserDto findUserByID(@PathVariable(name = "id") Integer id){
+//      return   userService.findUserById(id);
+//    }
 
     @DeleteMapping("delete/{id}")
     public void deleteUser(@PathVariable(name = "id") Integer id) {

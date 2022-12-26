@@ -16,6 +16,10 @@ public class MainController {
     public String homePage(){
         return "homePage";
     }
+    @GetMapping("/extraInfo")
+    public String userHome(){
+        return "userHomePage";
+    }
 
 
 }

@@ -1,15 +1,16 @@
 package com.kara.studentscareer.bachelorpapel.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-
-import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@Email
 @Entity
 @Table(name = "Role")
 public class Role {
@@ -25,4 +26,7 @@ public class Role {
         super();
         this.name = name;
     }
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 }
