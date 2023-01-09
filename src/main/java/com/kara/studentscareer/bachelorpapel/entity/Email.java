@@ -17,12 +17,13 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "Email")
 public class Email {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Email_Id")
     private Integer emailId;
 
-    @javax.validation.constraints.Email
+
     @Column(name = "Email",unique = true)
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
     private String email;
@@ -36,5 +37,12 @@ public class Email {
 
     @Enumerated(EnumType.STRING)
     private EmailType emailType;
+
+
+    public Email(String newEmail, User loggedInUser,String emailType) {
+        this.email=newEmail;
+        this.user=loggedInUser;
+        this.emailType=EmailType.findByValue(emailType);
+    }
 
 }

@@ -1,24 +1,8 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Address;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface AddressService {
-
-    Address createAddress(Address address);
-
-    List<Address> findAllAddress();
-
-    Optional<Address>findAddressById(Integer id);
-
-    Address updateAddress(Address address,Integer id);
-
-    void deleteAddressById(Integer id);
-
-
-
-
-
+    void saveNewAddress(String street, String number, String postalCode, String city, String country, User loggedInUser, String addressType);
+    void deleteAddress(Integer id);
 }

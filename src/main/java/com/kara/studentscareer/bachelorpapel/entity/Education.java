@@ -40,11 +40,11 @@ public class Education {
 
     @Column(name = "EntryYear")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    private Integer entryYear;
+    private String entryYear;
 
     @Column(name = "GraduationYear")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    private Integer graduationYear;
+    private String graduationYear;
 
 
     @JsonIgnore
@@ -56,4 +56,14 @@ public class Education {
     @Enumerated(EnumType.STRING)
     private EducationLevel educationLevel;
 
+    public Education( String university, String department, String title, String country, String entryYear, String graduationYear, User user, String educationLevel) {
+        this.university = university;
+        this.department = department;
+        this.title = title;
+        this.country = country;
+        this.entryYear = entryYear;
+        this.graduationYear = graduationYear;
+        this.user = user;
+        this.educationLevel = EducationLevel.findByValue(educationLevel);
+    }
 }

@@ -51,5 +51,14 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private AddressType addressType;
 
+    public Address( String street, String number, String postalCode, String city, String country, User user, String addressType) {
+        this.street = street;
+        this.number = number;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+        this.user = user;
+        this.addressType = AddressType.findByValue(addressType);
+    }
 
 }

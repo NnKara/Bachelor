@@ -10,6 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PhoneDto {
 
-    private Integer number;
+    private String number;
     private PhoneType phoneType;
+
+    @Override
+    public String toString() {
+        return "number='" + number + '\'' +
+                "," + phoneType +
+                '}';
+    }
 }

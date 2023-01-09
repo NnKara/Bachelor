@@ -1,20 +1,11 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Email;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface EmailService {
 
-    Email createEmail(Email email);
 
-    List<Email>findAllEmails();
+  void addEmailWithType(String newEmail, User loggedInUser,String emailType);
 
-    Optional<Email>findEmailById(Integer id);
-
-    Email updateEmail(Integer id,Email email);
-
-    void deleteEmailById(Integer id);
-
+    void deleteEmail(String email);
 }

@@ -32,6 +32,14 @@ public class Phone {
     private PhoneType phoneType;
 
 
+//    public Phone(String number, User loggedInUser) {
+//        this.number=number;
+//        this.user=loggedInUser;
+//    }
 
-
+    public Phone(String newPhone, User loggedInUser,String phoneType) {
+        this.number=newPhone;
+        this.user=loggedInUser;
+        this.phoneType= PhoneType.findByValue(phoneType);
+    }
 }

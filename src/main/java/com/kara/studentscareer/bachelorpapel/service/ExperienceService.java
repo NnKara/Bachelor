@@ -1,19 +1,9 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Experience;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface ExperienceService {
+    void addNewExperience(String company, String position, String startDate, String endDate, User loggedInUser);
+    void deleteExperience(Integer id);
 
-    Experience createExperience(Experience experience);
-
-    List<Experience>findAllExperiences();
-
-    Optional<Experience>findExperienceById(Integer id);
-
-    Experience updateExperience(Integer id,Experience experience);
-
-    void deleteExperienceById(Integer id);
 }

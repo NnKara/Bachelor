@@ -1,47 +1,24 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
 import com.kara.studentscareer.bachelorpapel.entity.Phone;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.PhoneRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Optional;
 @Service
-public class PhoneServiceImpl implements PhoneService {
+public class PhoneServiceImpl implements PhoneService{
 
+    @Autowired
     private PhoneRepository phoneRepository;
-
     @Override
-    public Phone createPhone(Phone phone) {
-        return phoneRepository.save(phone);
+    public void addPhone(String number, User loggedInUser, String phoneType) {
+       Phone newPhone=new Phone(number,loggedInUser,phoneType);
+       phoneRepository.save(newPhone);
     }
 
     @Override
-    public List<Phone> findAllPhones() {
-        return phoneRepository.findAll();
-    }
+    public void deletePhone(Integer id) {
 
-    @Override
-    public Optional<Phone> findPhoneById(Integer id) {
-        return phoneRepository.findById(id);
-    }
-
-    @Override
-    public Phone updatePhone(Integer id, Phone updatedPhone) {
-        Optional<Phone> isTherePhone=findPhoneById(id);
-        if(isTherePhone.isEmpty()){
-            throw new EntityNotFoundException("There is no phone for this ID: "+id);
-        }
-        Phone existingPhone=isTherePhone.get();
-        existingPhone.setNumber(updatedPhone.getNumber());
-        existingPhone.setPhoneType(updatedPhone.getPhoneType());
-        phoneRepository.save(existingPhone);
-        return existingPhone;
-    }
-
-    @Override
-    public void deletePhoneById(Integer id) {
-        phoneRepository.deleteById(id);
     }
 }

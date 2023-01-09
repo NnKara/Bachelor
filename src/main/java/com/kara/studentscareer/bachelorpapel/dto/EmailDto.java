@@ -12,4 +12,10 @@ public class EmailDto {
 
     private String email;
     private EmailType emailType;
+
+    @Override
+    public String toString() {
+        return    "email='" + email + '\'' +
+                "," + emailType;
+                  }
 }

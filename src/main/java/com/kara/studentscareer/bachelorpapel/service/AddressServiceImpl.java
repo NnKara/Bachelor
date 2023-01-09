@@ -1,56 +1,26 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
 import com.kara.studentscareer.bachelorpapel.entity.Address;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.AddressRepository;
-import com.kara.studentscareer.bachelorpapel.utilClassCalculations.Calculations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class AddressServiceImpl implements AddressService {
+public class AddressServiceImpl implements AddressService{
 
+    @Autowired
     private AddressRepository addressRepository;
 
-    private Calculations calculations;
 
     @Override
-    public Address createAddress(Address address) {
-
-        return addressRepository.save(address);
+    public void saveNewAddress(String street, String number, String postalCode, String city, String country, User loggedInUser, String addressType) {
+        Address newAddress=new Address(street,number,postalCode,city,country,loggedInUser,addressType);
+        addressRepository.save(newAddress);
     }
 
     @Override
-    public List<Address> findAllAddress() {
-        return addressRepository.findAll();
-    }
+    public void deleteAddress(Integer id) {
 
-    @Override
-    public Optional<Address> findAddressById(Integer id) {
-        return addressRepository.findById(id);
-    }
-
-    @Override
-    public Address updateAddress(Address updatedAddress, Integer id) {
-        Optional<Address> isThereAddress = addressRepository.findById(id);
-        if (isThereAddress.isEmpty()) {
-            throw new EntityNotFoundException("There is no Address with this ID: " + id);
-        }
-        Address existingAddress=isThereAddress.get();
-        existingAddress.setCity(updatedAddress.getCity());
-        existingAddress.setNumber(updatedAddress.getNumber());
-        existingAddress.setCountry(updatedAddress.getCountry());
-        existingAddress.setPostalCode(updatedAddress.getPostalCode());
-        existingAddress.setAddressType(updatedAddress.getAddressType());
-        addressRepository.save(existingAddress);
-        return existingAddress;
-    }
-
-
-    @Override
-    public void deleteAddressById(Integer id) {
-        addressRepository.deleteById(id);
     }
 }

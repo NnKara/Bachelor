@@ -10,8 +10,17 @@ import lombok.Setter;
 public class ExperienceDto {
 
     private String company;
-    private Integer endDate;
-    private Integer startDate;
+    private String endDate;
+    private String startDate;
     private String position;
 
+    @Override
+    public String toString() {
+        return
+                "Company='" + company + '\'' +
+                        ", Starting Date=" + startDate +
+                        ", End Date=" + endDate +
+                        ", Position='" + position + '\'' +
+                        '}';
+    }
 }

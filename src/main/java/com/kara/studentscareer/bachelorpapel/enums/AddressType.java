@@ -18,6 +18,18 @@ public enum AddressType {
         this.name=name;
     }
 
+    public static AddressType findByValue(String value) {
+        for (AddressType address : AddressType.values()) {
+            if (value.contains(address.name)) {
+                return  address;
+            }
+        }
+        return null;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Type:" +
+                 name + '\'';
+    }
 }

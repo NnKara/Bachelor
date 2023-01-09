@@ -15,6 +15,16 @@ public class StudentInfoDto {
     @NotNull
     @NotEmpty
     private String am;
-    private Integer entryYear;
-    private Integer graduationYear;
+    private String entryYear;
+    private String graduationYear;
+
+
+    @Override
+    public String toString() {
+        return
+                "A-M='" + am + '\'' +
+                ", Entry-Year=" + entryYear +
+                ", Graduation-Year=" + graduationYear +
+                '}';
+    }
 }

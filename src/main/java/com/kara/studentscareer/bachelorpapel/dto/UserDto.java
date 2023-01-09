@@ -3,6 +3,7 @@ package com.kara.studentscareer.bachelorpapel.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class UserDto {
 
@@ -32,7 +34,7 @@ public class UserDto {
     @Size(min = 2,max = 15)
     private String lastname;
 
-    @javax.validation.constraints.Email(regexp = "^(.+)@(.+)$",message = "Invalid Email pattern!")
+//    @javax.validation.constraints.Email(regexp = "^(.+)@(.+)$",message = "Invalid Email pattern!")
     private List<EmailDto> emails;
 
     @Size(min=2,max=30,message = "Το πεδίο είναι υποχρεωτικό!")
@@ -47,6 +49,7 @@ public class UserDto {
 
 
     private List<AddressDto> addresses;
+
 
     private StudentInfoDto studentInfo;
 

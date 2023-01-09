@@ -25,11 +25,11 @@ public class StudentInfo {
 
     @Column(name = "EntryYear")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    private Integer entryYear;
+    private String entryYear;
 
     @Column(name = "GraduationYear")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    private Integer graduationYear;
+    private String graduationYear;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
@@ -38,5 +38,10 @@ public class StudentInfo {
     @ToString.Exclude
     private User user;
 
-
+    public StudentInfo(String am, String entryYear, String graduationYear, User user) {
+        this.am = am;
+        this.entryYear = entryYear;
+        this.graduationYear = graduationYear;
+        this.user = user;
+    }
 }

@@ -1,19 +1,8 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.StudentInfo;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface StudentInfoService {
-
-    StudentInfo createStudent(StudentInfo student);
-
-    List<StudentInfo>findAllStudents();
-
-    Optional<StudentInfo>findStudentById(Integer id);
-
-    StudentInfo updateStudent(Integer id, StudentInfo student);
-
-    void deleteStudentById(Integer id);
+    void addStudentInfo(String am, String entryYear, String graduationYear, User loggedInUser);
+    void deleteStudentInfo();
 }

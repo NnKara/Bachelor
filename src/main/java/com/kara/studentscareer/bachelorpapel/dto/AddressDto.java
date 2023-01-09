@@ -10,10 +10,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddressDto {
 
-    private AddressType addressType;
-    private String city;
     private String country;
+    private String city;
+    private String street;
     private String streetNumber;
     private String postalCode;
-    private String street;
+    private AddressType addressType;
+
+    @Override
+    public String toString() {
+        return
+                "Country='" + country + '\'' +
+                ", City='" + city + '\'' +
+                ", Street='" + street + '\'' +
+                ", Street Number='" + streetNumber + '\'' +
+                ", Postal Code='" + postalCode + '\'' +
+                ", Address Type=" + addressType +
+                '}';
+    }
 }

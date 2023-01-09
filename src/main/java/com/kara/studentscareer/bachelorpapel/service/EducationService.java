@@ -1,21 +1,8 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Education;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface EducationService {
-
-
-        Education createEducation(Education education);
-
-        List<Education> findAllEducations();
-
-        Optional<Education>findEducationById(Integer id);
-
-        Education updateEducationById(Education education,Integer id);
-
-        void deleteEducationById(Integer id);
-        
+    void addNewEducation(String entryYear, String graduationYear, String university, String department, User loggedInUser, String educationLevel, String title, String country);
+    void deleteEducation();
 }

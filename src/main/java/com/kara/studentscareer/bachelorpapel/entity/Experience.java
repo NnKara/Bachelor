@@ -29,10 +29,10 @@ public class Experience {
     private String position;
 
     @Column(name = "StartDate")
-    private Integer startDate;
+    private String startDate;
 
     @Column(name = "EndDate")
-    private Integer endDate;
+    private String endDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,4 +40,11 @@ public class Experience {
     @ToString.Exclude
     private User user;
 
+    public Experience( String company, String position, String startDate, String endDate, User user) {
+        this.company = company;
+        this.position = position;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.user = user;
+    }
 }

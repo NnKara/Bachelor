@@ -14,11 +14,7 @@ public class MainController {
 
     @GetMapping("/")
     public String homePage(){
-        return "homePage";
-    }
-    @GetMapping("/extraInfo")
-    public String userHome(){
-        return "userHomePage";
+        return "login";
     }
 
 

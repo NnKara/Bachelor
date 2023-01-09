@@ -1,19 +1,10 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
-import com.kara.studentscareer.bachelorpapel.entity.Phone;
-
-import java.util.List;
-import java.util.Optional;
+import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface PhoneService {
 
-    Phone createPhone(Phone phone);
+    void addPhone(String phone, User loggedInUser,String phoneType);
 
-    List<Phone>findAllPhones();
-
-    Optional<Phone>findPhoneById(Integer id);
-
-    Phone updatePhone(Integer id,Phone phone);
-
-    void deletePhoneById(Integer id);
+    void deletePhone(Integer id);
 }

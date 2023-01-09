@@ -18,6 +18,19 @@ public enum EducationLevel {
     EducationLevel(String name){
         this.name=name;
     }
+    public static EducationLevel findByValue(String value) {
+        for (EducationLevel education : EducationLevel.values()) {
+            if (value.contains(education.name)) {
+                return  education;
+            }
+        }
+        return null;
+    }
 
-
+    @Override
+    public String toString() {
+        return "EducationLevel{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
