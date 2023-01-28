@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "Email")
 public class Email {
@@ -45,4 +44,8 @@ public class Email {
         this.emailType=EmailType.findByValue(emailType);
     }
 
+    @Override
+    public String toString() {
+        return email ;
+    }
 }

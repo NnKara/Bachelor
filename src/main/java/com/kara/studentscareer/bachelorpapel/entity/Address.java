@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "Address")
 public class Address {
@@ -61,4 +60,13 @@ public class Address {
         this.addressType = AddressType.findByValue(addressType);
     }
 
+    @Override
+    public String toString() {
+        return
+                " Street= " + street +
+                " Number='" + number +
+                " Postal Code= " + postalCode +
+                " City= " + city +
+                " Country= " + country ;
+    }
 }

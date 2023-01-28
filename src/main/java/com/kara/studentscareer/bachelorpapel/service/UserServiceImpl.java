@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -38,11 +37,12 @@ public class UserServiceImpl implements UserService {
         }
         User newUser=userConverter.dtoToEntity(userDto);
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
         Role role=roleRepository.findByName("ROLE_USER");
-        if(role==null){
+        if(role!=null){
             role=checkRoleExist();
         }
-        newUser.setRoles(Arrays.asList(role));
+        newUser.setRoles(List.of(role));
         userRepository.save(newUser);
     }
 
@@ -68,14 +68,6 @@ public class UserServiceImpl implements UserService {
         return userConverter.entityToDto(isThereUser);
     }
 
-//    public UserDto findUserById(Integer id) {
-//        Optional<User> isThereUser = userRepository.findById(id);
-//        if (isThereUser.isEmpty()) {
-//            throw new EntityNotFoundException("There is no User with this ID: " + id);
-//        }
-//        User existingUser = isThereUser.get();
-//        return userConverter.entityToDto(existingUser);
-//    }
 
     @Override
     public UserDto updateUser(User updateUser) {

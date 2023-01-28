@@ -7,5 +7,5 @@ public interface EmailService {
 
   void addEmailWithType(String newEmail, User loggedInUser,String emailType);
 
-    void deleteEmail(String email);
+    void deleteEmail(Integer emailId);
 }

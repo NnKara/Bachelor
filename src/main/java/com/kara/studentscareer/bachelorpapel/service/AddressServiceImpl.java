@@ -20,7 +20,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public void deleteAddress(Integer id) {
-
+    public void deleteAddress(Integer addressId) {
+        addressRepository.deleteById(addressId);
     }
 }

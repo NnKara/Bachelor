@@ -6,5 +6,5 @@ public interface PhoneService {
 
     void addPhone(String phone, User loggedInUser,String phoneType);
 
-    void deletePhone(Integer id);
+    void deletePhone(Integer phoneId);
 }

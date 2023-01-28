@@ -28,7 +28,7 @@ public class ExperienceServiceImpl implements ExperienceService{
             experienceRepository.deleteById(id);
         }
         else {
-            throw new EntityNotFoundException("Your emails doesnt exist!");
+            throw new EntityNotFoundException("Experience doesn't exist!");
         }
     }
 }

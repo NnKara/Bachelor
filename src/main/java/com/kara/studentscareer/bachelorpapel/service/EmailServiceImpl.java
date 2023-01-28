@@ -5,6 +5,7 @@ import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -31,8 +32,8 @@ public class EmailServiceImpl implements EmailService {
 
 
     @Override
-    public void deleteEmail(String email) {
-        Email usersEmail=emailRepository.findByEmail(email);
-        emailRepository.delete(usersEmail);
+    @Transactional
+    public void deleteEmail(Integer emailId) {
+        emailRepository.deleteById(emailId);
     }
 }

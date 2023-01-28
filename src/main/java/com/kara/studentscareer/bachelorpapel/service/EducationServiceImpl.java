@@ -3,8 +3,11 @@ package com.kara.studentscareer.bachelorpapel.service;
 import com.kara.studentscareer.bachelorpapel.entity.Education;
 import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.EducationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class EducationServiceImpl implements EducationService {
@@ -21,7 +24,14 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public void deleteEducation() {
-
+    public void deleteEducation(Integer educationId) {
+            Optional<Education> educationToDelete=educationRepository.findById(educationId);
+            if(educationToDelete.isPresent()){
+                educationRepository.deleteById(educationId);
+            }
+            else {
+                throw new EntityNotFoundException("Education doesn't exist!");
+            }
+        }
     }
-}
+

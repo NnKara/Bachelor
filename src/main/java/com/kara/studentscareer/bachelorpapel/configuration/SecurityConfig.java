@@ -19,17 +19,18 @@ public class SecurityConfig {
     private CustomUserDetailsService userDetailsService;
 
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/registration").permitAll()
+                        authorize
+                                .requestMatchers("/admin/**").authenticated()
+                                .requestMatchers("/registration").permitAll()
                                 .requestMatchers("/**").permitAll()
-                                .requestMatchers("/user").permitAll()
-                                .requestMatchers("/user/**").permitAll()
+                                .requestMatchers("/user").authenticated()
+                                .requestMatchers("/user/**").permitAll())
 
-                ).formLogin(
+                .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .usernameParameter("username")
@@ -47,7 +48,6 @@ public class SecurityConfig {
     public static BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "Education")
 public class Education {
@@ -65,5 +64,17 @@ public class Education {
         this.graduationYear = graduationYear;
         this.user = user;
         this.educationLevel = EducationLevel.findByValue(educationLevel);
+    }
+
+    @Override
+    public String toString() {
+        return
+                " University: " + university +
+                " Department: " + department +
+                " Title: : " + title +
+                " Country: " + country +
+                " Entry Year: " + entryYear +
+                " Graduation Year: " + graduationYear +
+                " Education Level: " + educationLevel ;
     }
 }

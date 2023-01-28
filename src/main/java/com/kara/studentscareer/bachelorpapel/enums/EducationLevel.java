@@ -29,8 +29,6 @@ public enum EducationLevel {
 
     @Override
     public String toString() {
-        return "EducationLevel{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

@@ -5,6 +5,7 @@ import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PhoneServiceImpl implements PhoneService{
@@ -18,7 +19,8 @@ public class PhoneServiceImpl implements PhoneService{
     }
 
     @Override
-    public void deletePhone(Integer id) {
-
+    @Transactional
+    public void deletePhone(Integer phoneId) {
+        phoneRepository.deleteById(phoneId);
     }
 }

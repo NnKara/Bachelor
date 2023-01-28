@@ -14,8 +14,6 @@ public enum PhoneType {
         PhoneType(String name){
                 this.name=name;
         }
-
-
         public static PhoneType findByValue(String value) {
                 for (PhoneType phone : PhoneType.values()) {
             if (value.contains(phone.name)) {
@@ -27,7 +25,6 @@ public enum PhoneType {
 
         @Override
         public String toString() {
-                return "Type:" +
-                         name + '\'' ;
+                return name ;
         }
 }

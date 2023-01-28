@@ -29,7 +29,6 @@ public enum AddressType {
 
     @Override
     public String toString() {
-        return "Type:" +
-                 name + '\'';
+        return name;
     }
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum EmailType {
 
     PERSONAL ("Προσωπικό E-mail"),
-    WORK ("Ερτγασιακό E-mail");
+    WORK ("Εργασιακό E-mail");
 
     private final String name;
 
@@ -25,7 +25,6 @@ public enum EmailType {
 
     @Override
     public String toString() {
-        return "Type:" +
-                 name + '\'';
+        return  name ;
     }
 }

@@ -12,7 +12,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Setter
 @DynamicInsert
 @DynamicUpdate
-@ToString
 @Entity
 @Table(name = "Experience")
 public class Experience {
@@ -40,11 +39,20 @@ public class Experience {
     @ToString.Exclude
     private User user;
 
-    public Experience( String company, String position, String startDate, String endDate, User user) {
+    public Experience(String company, String position, String startDate, String endDate, User user) {
         this.company = company;
         this.position = position;
         this.startDate = startDate;
         this.endDate = endDate;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return
+                " Company= " + company +
+                " - Position= " + position +
+                " - Starting Date= " + startDate +
+                " - Finished Date= " + endDate ;
     }
 }

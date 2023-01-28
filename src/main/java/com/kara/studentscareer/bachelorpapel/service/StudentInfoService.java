@@ -4,5 +4,5 @@ import com.kara.studentscareer.bachelorpapel.entity.User;
 
 public interface StudentInfoService {
     void addStudentInfo(String am, String entryYear, String graduationYear, User loggedInUser);
-    void deleteStudentInfo();
+    void deleteStudentInfoByAM(String am);
 }

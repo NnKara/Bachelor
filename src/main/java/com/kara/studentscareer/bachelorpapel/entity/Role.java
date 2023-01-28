@@ -19,11 +19,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String name;
 
     public Role(String name) {
-        super();
+       super();
         this.name = name;
     }
 

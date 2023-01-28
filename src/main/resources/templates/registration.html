@@ -39,16 +39,13 @@
                 <div class="alert alert-info">You've successfully registered!
                 </div>
             </div>
-
-            <h1>Registration</h1>
-
+                    <h1>Registration</h1>
             <form   th:action="@{/registration}" method="post" class="form" th:object="${user}">
                 <div class="form-group">
                     <label  class="control-label" for="firstname"> First Name </label>
                     <input type="text" id="firstname" class="form-control"  th:field="*{firstname}" placeholder="Enter First Name"
                            required autofocus="autofocus"/>
                 </div>
-
 
                 <div class="form-group">
                     <label class="control-label" for="lastname"> Last Name </label> <input

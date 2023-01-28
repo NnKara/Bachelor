@@ -13,7 +13,7 @@ public class AddressDto {
     private String country;
     private String city;
     private String street;
-    private String streetNumber;
+    private String number;
     private String postalCode;
     private AddressType addressType;
 
@@ -23,7 +23,7 @@ public class AddressDto {
                 "Country='" + country + '\'' +
                 ", City='" + city + '\'' +
                 ", Street='" + street + '\'' +
-                ", Street Number='" + streetNumber + '\'' +
+                ", Street Number='" + number + '\'' +
                 ", Postal Code='" + postalCode + '\'' +
                 ", Address Type=" + addressType +
                 '}';

@@ -9,7 +9,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "Phone")
 public class Phone {
@@ -19,7 +18,7 @@ public class Phone {
     @Column(name = "Phone_Id")
     private Integer phoneId;
 
-    @Column(name = "Number",unique = true)
+    @Column(name = "Number", unique = true)
     private String number;
 
     @JsonIgnore
@@ -32,14 +31,14 @@ public class Phone {
     private PhoneType phoneType;
 
 
-//    public Phone(String number, User loggedInUser) {
-//        this.number=number;
-//        this.user=loggedInUser;
-//    }
+    public Phone(String newPhone, User loggedInUser, String phoneType) {
+        this.number = newPhone;
+        this.user = loggedInUser;
+        this.phoneType = PhoneType.findByValue(phoneType);
+    }
 
-    public Phone(String newPhone, User loggedInUser,String phoneType) {
-        this.number=newPhone;
-        this.user=loggedInUser;
-        this.phoneType= PhoneType.findByValue(phoneType);
+    @Override
+    public String toString() {
+        return number;
     }
 }

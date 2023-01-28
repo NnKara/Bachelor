@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 @Table(name = "StudentInfo")
 public class StudentInfo {
@@ -43,5 +42,14 @@ public class StudentInfo {
         this.entryYear = entryYear;
         this.graduationYear = graduationYear;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "A-A= " + am +
+                " - Entry Year= " + entryYear +
+                " - Graduation Year= " + graduationYear ;
+
     }
 }

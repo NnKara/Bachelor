@@ -44,7 +44,7 @@ public class User  {
     private String lastname;
 
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.MERGE)
     private StudentInfo studentInfo;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
