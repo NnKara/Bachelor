@@ -70,11 +70,7 @@ public class Education {
     public String toString() {
         return
                 " University: " + university +
-                " Department: " + department +
-                " Title: : " + title +
-                " Country: " + country +
-                " Entry Year: " + entryYear +
-                " Graduation Year: " + graduationYear +
-                " Education Level: " + educationLevel ;
+                " / Department: " + department +
+                " / Education Level: " + educationLevel ;
     }
 }

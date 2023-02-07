@@ -15,14 +15,21 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     public void addStudentInfo(String am, String entryYear, String graduationYear, User loggedInUser) {
-        StudentInfo newStudentInfo = new StudentInfo(am, entryYear, graduationYear, loggedInUser);
-        studentInfoRepository.save(newStudentInfo);
-    }
+            StudentInfo newStudentInfo = new StudentInfo(am, entryYear, graduationYear, loggedInUser);
+            studentInfoRepository.save(newStudentInfo);
+        }
+
 
     @Override
     @Transactional
     public void deleteStudentInfoByAM(String am) {
         studentInfoRepository.deleteStudentInfoByAm(am);
     }
+
+//    @Override
+//    public boolean studentInfoExists(String am, User user) {
+//        StudentInfo studentInfo=studentInfoRepository.getStudentInfFromAm(am,user);
+//        return studentInfo!=null;
+//    }
 }
 

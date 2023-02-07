@@ -24,10 +24,10 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/admin/**").authenticated()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/registration").permitAll()
                                 .requestMatchers("/**").permitAll()
-                                .requestMatchers("/user").authenticated()
+                                .requestMatchers("/user").permitAll()
                                 .requestMatchers("/user/**").permitAll())
 
                 .formLogin(

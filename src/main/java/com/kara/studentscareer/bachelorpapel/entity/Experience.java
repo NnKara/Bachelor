@@ -51,8 +51,6 @@ public class Experience {
     public String toString() {
         return
                 " Company= " + company +
-                " - Position= " + position +
-                " - Starting Date= " + startDate +
-                " - Finished Date= " + endDate ;
+                " / Position= " + position ;
     }
 }

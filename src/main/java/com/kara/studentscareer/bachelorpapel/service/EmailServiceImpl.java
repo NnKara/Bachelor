@@ -1,5 +1,6 @@
 package com.kara.studentscareer.bachelorpapel.service;
 
+import com.kara.studentscareer.bachelorpapel.entity.Address;
 import com.kara.studentscareer.bachelorpapel.entity.Email;
 import com.kara.studentscareer.bachelorpapel.entity.User;
 import com.kara.studentscareer.bachelorpapel.repository.EmailRepository;
@@ -14,22 +15,11 @@ public class EmailServiceImpl implements EmailService {
     private EmailRepository emailRepository;
 
 
-
-
-
-//    @Override
-//    public Email save(String email,EmailType emailType) {
-//       Email newEmail= emailConverter.stringToEmail(email);
-//        emailRepository.save(newEmail,emailType);
-//        return newEmail;
-//    }
-
     @Override
     public void addEmailWithType(String controllerEmail, User loggedInUser,String emailType) {
         Email newEmail=new Email(controllerEmail,loggedInUser, emailType);
         emailRepository.save(newEmail);
     }
-
 
     @Override
     @Transactional

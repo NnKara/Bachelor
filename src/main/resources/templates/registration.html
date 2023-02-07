@@ -39,24 +39,27 @@
                 <div class="alert alert-info">You've successfully registered!
                 </div>
             </div>
-                    <h1>Registration</h1>
-            <form   th:action="@{/registration}" method="post" class="form" th:object="${user}">
+            <h1>Registration</h1>
+            <form th:action="@{/registration}" method="post" class="form" th:object="${user}">
                 <div class="form-group">
-                    <label  class="control-label" for="firstname"> First Name </label>
-                    <input type="text" id="firstname" class="form-control"  th:field="*{firstname}" placeholder="Enter First Name"
+                    <label class="control-label" for="firstname"> First Name </label>
+                    <input type="text" id="firstname" class="form-control" th:field="*{firstname}"
+                           placeholder="Enter First Name"
                            required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="lastname"> Last Name </label> <input
-                        type="text" id="lastname" class="form-control" th:field="*{lastname}"  placeholder="Enter Last Name"
+                        type="text" id="lastname" class="form-control" th:field="*{lastname}"
+                        placeholder="Enter Last Name"
                         required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="username"> Username </label>
                     <input
-                            type="text" id="username" class="form-control" th:field="*{username}"   required placeholder="Enter Username"
+                            type="text" id="username" class="form-control" th:field="*{username}" required
+                            placeholder="Enter Username"
                             autofocus="autofocus"/>
                 </div>
 
@@ -66,14 +69,9 @@
                             id="password" class="form-control" type="password" placeholder="Enter password"
                             th:field="*{password}" required autofocus="autofocus"/>
                 </div>
-                <!--                <div class="form-group">-->
-                <!--                    <label class="control-label" for="confirmPassword"> *Password </label>-->
-                <!--                    <input type="password" id="confirmPassword" class="form-control" th:field="*{confirmPassword}"  placeholder="Re-Enter Password"-->
-                <!--                        required autofocus="autofocus"/>-->
-                <!--                    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="confirmaPassword" class="invalid-feedback"></div>-->
 
                 <div class="form-group">
-                    <button  type="submit"  class="btn btn-success">Register</button>
+                    <button type="submit" class="btn btn-success">Register</button>
                     <span>Already have an account? <a href="/" th:href="@{/login}">Login here</a></span>
                 </div>
             </form>
@@ -82,11 +80,6 @@
 </div>
 </body>
 </html>
-
-
-
-
-
 
 
 <!--.myBox {-->
