@@ -11,6 +11,7 @@ import lombok.Setter;
 public class EmailDto {
 
 
+    private int emailId;
     private String email;
     private EmailType emailType;
 

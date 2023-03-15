@@ -2,7 +2,9 @@ package com.kara.bachelorpapel.controller;
 
 import com.kara.bachelorpapel.converter.UserConverter;
 import com.kara.bachelorpapel.dto.UserDto;
+import com.kara.bachelorpapel.entity.Address;
 import com.kara.bachelorpapel.entity.User;
+import com.kara.bachelorpapel.repository.AddressRepository;
 import com.kara.bachelorpapel.repository.EmailRepository;
 import com.kara.bachelorpapel.repository.UserRepository;
 import com.kara.bachelorpapel.service.*;
@@ -11,10 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -42,6 +41,8 @@ public class UserController {
 
     @Autowired
     private EmailRepository emailRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
 
     @GetMapping
@@ -74,17 +75,32 @@ public class UserController {
         return "addInfoProfile";
     }
 
+    @GetMapping("/update/address/{id}")
+    public String showFormUpdateAddress(@PathVariable(value = "id")Integer id,Model model){
+        User loggedInUser=getLoggedInUser();
+        model.addAttribute("user",loggedInUser);
+        Address address=addressService.getAddressById(id);
+        model.addAttribute("address",address);
+        return "updateAddress";
+    }
 
-    @PostMapping("/update/email")
-    public String updateUsersEmail(@RequestParam("email") String email,
+    @PostMapping("/update/address/{id}")
+    public String updateAddress(@PathVariable(value = "id") Integer id,@ModelAttribute("address") Address address){
+        address.setAddressId(id);
+        addressService.updateAddress(address);
+        return "userProfile";
+    }
+
+    @PostMapping("/add/email")
+    public String addUsersEmail(@RequestParam("email") String email,
                                    @RequestParam("emailType") String emailType) {
         User loggedInUser = getLoggedInUser();
         emailService.addEmailWithType(email, loggedInUser, emailType);
         return "addInfoProfile";
     }
 
-    @PostMapping("/update/phone")
-    public String updateUsersPhone(@RequestParam("phone") String phone,
+    @PostMapping("/add/phone")
+    public String addUsersPhone(@RequestParam("phone") String phone,
                                    @RequestParam("phoneType") String phoneType) {
 
         User loggedInUser = getLoggedInUser();
@@ -92,8 +108,8 @@ public class UserController {
         return "addInfoProfile";
     }
 
-    @PostMapping("/update/address")
-    public String updateUsersPhone(@RequestParam("addressType") String addressType,
+    @PostMapping("/add/address")
+    public String addUsersPhone(@RequestParam("addressType") String addressType,
                                    @RequestParam("country") String country,
                                    @RequestParam("city") String city,
                                    @RequestParam("postalCode") String postalCode,
@@ -105,8 +121,8 @@ public class UserController {
         return "addInfoProfile";
     }
 
-    @PostMapping("/update/education")
-    public String updateUsersEducation(@RequestParam("educationLevel") String educationLevel,
+    @PostMapping("/add/education")
+    public String addUsersEducation(@RequestParam("educationLevel") String educationLevel,
                                        @RequestParam("university") String university,
                                        @RequestParam("department") String department,
                                        @RequestParam("title") String title,
@@ -120,7 +136,7 @@ public class UserController {
         return "addInfoProfile";
     }
 
-    @PostMapping("/update/studentInfo")
+    @PostMapping("/add/studentInfo")
     public String addStudentInfo(@RequestParam("am") String am,
                                  @RequestParam("entryYears") String entryYear,
                                  @RequestParam("graduationYears") String graduationYear,Model model) {
@@ -129,8 +145,8 @@ public class UserController {
             return "addInfoProfile";
         }
 
-    @PostMapping("/update/experience")
-    public String addStudentInfo(@RequestParam("company") String company,
+    @PostMapping("/add/experience")
+    public String addExperience(@RequestParam("company") String company,
                                  @RequestParam("position") String position,
                                  @RequestParam("startDate") String startDate,
                                  @RequestParam("endDate") String endDate) {
@@ -145,7 +161,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         emailService.deleteEmail(emailId);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
 
     @PostMapping("/delete/phone")
@@ -154,7 +170,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         phoneService.deletePhone(phoneId);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
 
     @PostMapping("/delete/address")
@@ -163,7 +179,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         addressService.deleteAddress(addressId);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
 
     @PostMapping("/delete/experience")
@@ -172,7 +188,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         experienceService.deleteExperience(experienceId);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
 
     @PostMapping("/delete/education")
@@ -181,7 +197,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         educationService.deleteEducation(educationId);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
 
     @PostMapping("/delete/studentInfo")
@@ -190,8 +206,12 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
         studentInfoService.deleteStudentInfoByAM(am);
         userRepository.save(loggedInUser);
-        return "deletePage";
+        return "userProfile";
     }
+
+
+
+
 }
 
 

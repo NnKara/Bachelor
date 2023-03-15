@@ -3,17 +3,13 @@ package com.kara.bachelorpapel.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
-
-import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class StudentInfoDto {
 
-    @NotNull
-    @NotEmpty
+
     private String am;
     private String entryYear;
     private String graduationYear;

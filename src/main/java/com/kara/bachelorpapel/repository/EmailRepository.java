@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface EmailRepository extends JpaRepository<Email,Integer> {
-//    void deleteByEmail(String email);
+// void deleteByEmail(List<Email> email);
 }

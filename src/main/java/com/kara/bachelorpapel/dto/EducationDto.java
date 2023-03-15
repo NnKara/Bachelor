@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EducationDto {
 
+    private int educationId;
+
     private String country;
     private String university;
     private String department;

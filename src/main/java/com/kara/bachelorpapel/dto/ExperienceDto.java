@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExperienceDto {
 
+    private int experienceId;
     private String company;
     private String endDate;
     private String startDate;

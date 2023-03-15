@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface StudentInfoRepository extends JpaRepository<StudentInfo,Integer> {
     void deleteStudentInfoByAm(String am);
 
-//    StudentInfo getStudentInfFromAm(String am, User user);
 }

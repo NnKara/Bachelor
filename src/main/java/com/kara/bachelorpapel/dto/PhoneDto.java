@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PhoneDto {
 
+    private int phoneId;
     private String number;
     private PhoneType phoneType;
 

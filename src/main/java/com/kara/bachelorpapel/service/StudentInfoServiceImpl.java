@@ -26,10 +26,5 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         studentInfoRepository.deleteStudentInfoByAm(am);
     }
 
-//    @Override
-//    public boolean studentInfoExists(String am, User user) {
-//        StudentInfo studentInfo=studentInfoRepository.getStudentInfFromAm(am,user);
-//        return studentInfo!=null;
-//    }
 }
 

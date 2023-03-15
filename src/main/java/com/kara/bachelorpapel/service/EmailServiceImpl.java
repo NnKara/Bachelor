@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
@@ -18,6 +20,11 @@ public class EmailServiceImpl implements EmailService {
     public void addEmailWithType(String controllerEmail, User loggedInUser, String emailType) {
         Email newEmail=new Email(controllerEmail,loggedInUser, emailType);
         emailRepository.save(newEmail);
+    }
+
+    @Override
+    public void deleteByEmail(List<Email> emails) {
+//        emailRepository.deleteByEmail(emails);
     }
 
     @Override
