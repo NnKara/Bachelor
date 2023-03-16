@@ -43,17 +43,23 @@ public class AddressServiceImpl implements AddressService{
       Address dbAddress=getAddressById(address.getAddressId());
        if(dbAddress==null){
             throw new EntityNotFoundException("This address doesn't exists!");
-       } else if (address.getAddressType()!=null) {
+       }
+       if (address.getAddressType()!=null) {
            dbAddress.setAddressType(address.getAddressType());
-       } else if (address.getStreet()!=null) {
+       }
+       if (address.getStreet()!=null) {
            dbAddress.setStreet(address.getStreet());
-       } else if (address.getNumber()!=null) {
+       }
+       if (address.getNumber()!=null) {
            dbAddress.setNumber(address.getNumber());
-       } else if (address.getCity()!=null) {
+       }
+       if (address.getCity()!=null) {
            dbAddress.setCity(address.getCity());
-       } else if (address.getCountry()!=null) {
+       }
+       if (address.getCountry()!=null) {
            dbAddress.setCountry(address.getCountry());
-       }else if(address.getPostalCode()!=null) {
+       }
+       if(address.getPostalCode()!=null) {
            dbAddress.setPostalCode(address.getPostalCode());
        }
        addressRepository.save(dbAddress);
@@ -62,8 +68,8 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public void deleteAddress(Integer addressId) {
-        Optional<Address> dbAddress=addressRepository.findById(addressId);
-        if(dbAddress.isEmpty()){
+        Address dbAddress=getAddressById(addressId);
+        if(dbAddress==null){
             throw new EntityNotFoundException("Address not found!");
         }else{
         addressRepository.deleteById(addressId);

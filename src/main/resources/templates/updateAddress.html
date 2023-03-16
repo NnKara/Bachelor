@@ -59,9 +59,10 @@
             <select class="form-control" id="addressType" name="addressType">
                 <option selected>Select menu</option>
                 <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
-                        th:value="${addressType}"
-                        th:text="${addressType.name}">
+                        th:value="${addressType.name()}"
+                        th:text="${addressType}">
                 </option>
+
             </select>
         </td>
         </tbody>

@@ -1,6 +1,8 @@
 package com.kara.bachelorpapel.dto;
 
 import com.kara.bachelorpapel.enums.AddressType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +18,8 @@ public class AddressDto {
     private String street;
     private String number;
     private String postalCode;
+
+    @Enumerated(EnumType.STRING)
     private AddressType addressType;
 
     @Override

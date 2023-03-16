@@ -85,7 +85,9 @@ public class UserController {
     }
 
     @PostMapping("/update/address/{id}")
-    public String updateAddress(@PathVariable(value = "id") Integer id,@ModelAttribute("address") Address address){
+    public String updateAddress(@PathVariable(value = "id") Integer id,@ModelAttribute("address") Address address,Model model){
+        User loggedInUser=getLoggedInUser();
+        model.addAttribute("user",loggedInUser);
         address.setAddressId(id);
         addressService.updateAddress(address);
         return "userProfile";
