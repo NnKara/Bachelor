@@ -25,7 +25,7 @@ public class Email {
 
     @Column(name = "Email",unique = true)
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    private String email;
+    private String userEmail;
 
 
     @JsonIgnore
@@ -39,13 +39,13 @@ public class Email {
 
 
     public Email(String newEmail, User loggedInUser,String emailType) {
-        this.email=newEmail;
+        this.userEmail=newEmail;
         this.user=loggedInUser;
         this.emailType= EmailType.findByValue(emailType);
     }
 
     @Override
     public String toString() {
-        return email ;
+        return userEmail ;
     }
 }

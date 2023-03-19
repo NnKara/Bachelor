@@ -12,11 +12,12 @@ public class EmailDto {
 
 
     private int emailId;
-    private String email;
+    private String userEmail;
+
     private EmailType emailType;
 
     @Override
     public String toString() {
-        return email;
+        return userEmail;
     }
 }

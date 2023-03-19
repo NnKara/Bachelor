@@ -22,6 +22,41 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
+    public Experience getExById(Integer id) {
+        Optional<Experience> optional = experienceRepository.findById(id);
+        Experience experience=null;
+        if (optional.isPresent()) {
+            experience = optional.get();
+        } else {
+            throw new RuntimeException(" Experience not found for id :: " + id);
+        }
+        return experience;
+    }
+
+    @Override
+    public Experience updateExp(Experience experience) {
+        Experience dbExp=getExById(experience.getExperienceId());
+        if(dbExp==null){
+            throw new EntityNotFoundException(" Experience not found for id :: " + experience.getExperienceId());
+        }
+        if(experience.getCompany()!=null){
+            dbExp.setCompany(experience.getCompany());
+        }
+        if(experience.getPosition()!=null){
+            dbExp.setPosition(experience.getPosition());
+        }
+        if(experience.getStartDate()!=null){
+            dbExp.setStartDate(experience.getStartDate());
+        }
+        if(experience.getEndDate()!=null){
+            dbExp.setEndDate(experience.getEndDate());
+        }
+
+        experienceRepository.save(dbExp);
+        return dbExp;
+    }
+
+    @Override
     public void deleteExperience(Integer id) {
         Optional<Experience> experienceToDelete=experienceRepository.findById(id);
         if(experienceToDelete.isPresent()){
