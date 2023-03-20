@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         User newUser=userConverter.dtoToEntity(userDto);
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Role role = roleRepository.findByName("ROLE_USER");
+        Role role = checkRoleExist();
         if (role == null) {
             role = new Role();
             role.setName("ROLE_USER");
