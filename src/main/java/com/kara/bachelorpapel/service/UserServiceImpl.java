@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
         }
         newUser.setRoles(List.of(role));
         userRepository.save(newUser);
-    }
+        }
+
+
 
     private Role checkRoleExist(){
         Role role=new Role();

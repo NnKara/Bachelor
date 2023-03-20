@@ -54,8 +54,8 @@
         </thead>
         <tbody>
         <td><input type="text" id="street" name="street" class="form-control"  th:field="*{street}" required autofocus="autofocus"/></td>
-        <td><input type="text" id="number" name="number" class="form-control" th:field="*{number}" required autofocus="autofocus"/></td>
-        <td><input type="text" id="postalCode" name="postalCode" class="form-control" th:field="*{postalCode}" required autofocus="autofocus"/></td>
+        <td><input type="number" id="number" name="number" class="form-control" th:field="*{number}" required autofocus="autofocus" min="0"/></td>
+        <td><input type="number" id="postalCode" name="postalCode" class="form-control" th:field="*{postalCode}" required autofocus="autofocus" min="0"/></td>
         <td><input type="text" id="city" name="city" class="form-control" th:field="*{city}" required autofocus="autofocus"/></td>
         <td><input type="text" id="country" name="country" class="form-control" th:field="*{country}" required autofocus="autofocus"/></td>
         <td>

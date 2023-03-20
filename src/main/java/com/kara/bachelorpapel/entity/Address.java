@@ -29,6 +29,7 @@ public class Address {
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
     private String number;
 
+
     @Column(name = "PostalCode")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
     private String postalCode;

@@ -36,8 +36,6 @@ public class EmailController {
         return "addInfoProfile";
     }
 
-
-
     @GetMapping("/update/{id}")
     public String updateEmail(@PathVariable(value="id") Integer id, Model model){
         User loggedInUser=getLoggedInUser();
