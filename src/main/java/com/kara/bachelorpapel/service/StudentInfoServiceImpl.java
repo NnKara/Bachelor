@@ -26,7 +26,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         if(stInfo!=null) {
             return stInfo;
         }else{
-            throw new EntityNotFoundException(" Student-Info not found for am :: " + am);
+            throw new EntityNotFoundException(" Student-Info not found for am : " + am);
         }
     }
 
@@ -34,10 +34,10 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     public StudentInfo updateStInfo(StudentInfo studentInfo) {
         StudentInfo dbStInfo=getStInfoByAm(studentInfo.getAm());
         if(dbStInfo==null){
-            throw new EntityNotFoundException(" Student-Info not found for am :: " + studentInfo.getAm());
+            throw new EntityNotFoundException(" Student-Info not found for am : " + studentInfo.getAm());
         }
-        if(studentInfo.getAm()!=null){
-            dbStInfo.setAm(studentInfo.getAm());
+        if(studentInfo.getId()!=null){
+            dbStInfo.setId(studentInfo.getId());
         }
         if(studentInfo.getEntryYear()!=null){
             dbStInfo.setEntryYear(studentInfo.getEntryYear());

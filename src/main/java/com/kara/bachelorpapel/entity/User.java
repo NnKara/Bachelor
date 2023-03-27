@@ -44,6 +44,9 @@ public class User  {
     private String lastname;
 
 
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private StudentInfo studentInfo;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private StudentInfo studentInfo;
 

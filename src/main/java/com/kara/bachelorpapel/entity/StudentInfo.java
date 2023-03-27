@@ -3,12 +3,14 @@ package com.kara.bachelorpapel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -30,6 +32,7 @@ public class StudentInfo {
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
     private String graduationYear;
 
+
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -43,11 +46,10 @@ public class StudentInfo {
         this.graduationYear = graduationYear;
         this.user = user;
     }
-
     @Override
     public String toString() {
         return
-                "A-A= " + am +
+                "A-A= " + id +
                 " - Entry Year= " + entryYear +
                 " - Graduation Year= " + graduationYear ;
 

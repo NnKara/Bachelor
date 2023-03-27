@@ -4,15 +4,20 @@ import com.kara.bachelorpapel.entity.Address;
 import com.kara.bachelorpapel.entity.User;
 import com.kara.bachelorpapel.repository.UserRepository;
 import com.kara.bachelorpapel.service.AddressServiceImpl;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Size;
 
 @Controller
 @RequestMapping("/address")
+@Validated
 public class AddressController {
 
     @Autowired
@@ -20,6 +25,9 @@ public class AddressController {
 
     @Autowired
     private AddressServiceImpl addressService;
+
+//    @Autowired
+//    private AddressValidator addressValidator;
 
 
     private User getLoggedInUser() {
@@ -29,17 +37,17 @@ public class AddressController {
     }
 
     @PostMapping("/add")
-    public String addUsersPhone(@RequestParam("addressType") String addressType,
-                                @RequestParam("country") String country,
+    public String addUsersAddress(@RequestParam("addressType") String addressType,
+                                @RequestParam("country") @NotBlank @Size(max = 2) String country,
                                 @RequestParam("city") String city,
                                 @RequestParam("postalCode") String postalCode,
                                 @RequestParam("number") String number,
-                                @RequestParam("street") String street) {
-
+                                @RequestParam("street") String street ) {
         User loggedInUser = getLoggedInUser();
         addressService.saveNewAddress(street, number, postalCode, city, country, loggedInUser, addressType);
         return "addInfoProfile";
     }
+
 
     @GetMapping("/update/{id}")
     public String showFormUpdateAddress(@PathVariable(value = "id")Integer id, Model model){

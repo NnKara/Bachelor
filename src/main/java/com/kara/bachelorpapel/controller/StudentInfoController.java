@@ -62,7 +62,7 @@ public class StudentInfoController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         studentInfoService.deleteStudentInfoByAM(am);
-        userRepository.save(loggedInUser);
+        //userRepository.save(loggedInUser);
         return "userProfile";
     }
 }
