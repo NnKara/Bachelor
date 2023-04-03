@@ -54,6 +54,11 @@ public class PhoneServiceImpl implements PhoneService {
     @Override
     @Transactional
     public void deletePhone(Integer phoneId) {
-        phoneRepository.deleteById(phoneId);
+        Phone dbPhone=getPhoneById(phoneId);
+        if(dbPhone==null){
+            throw new EntityNotFoundException("Phone not found!");
+        }else{
+            phoneRepository.deleteById(phoneId);
+        }
     }
 }

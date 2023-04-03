@@ -18,7 +18,9 @@ import javax.validation.constraints.NotBlank;
 public class StudentInfo {
 
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "StInfo_id")
+    private Integer studentInfoId;
 
     @Column(name = "AM",unique = true)
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
@@ -36,7 +38,6 @@ public class StudentInfo {
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @MapsId
     @ToString.Exclude
     private User user;
 
@@ -46,12 +47,13 @@ public class StudentInfo {
         this.graduationYear = graduationYear;
         this.user = user;
     }
+
     @Override
     public String toString() {
         return
-                "A-A= " + id +
-                " - Entry Year= " + entryYear +
-                " - Graduation Year= " + graduationYear ;
+                "A-M= " + am +
+                " Entry-Year= " + entryYear +
+                " Graduation-Year= " + graduationYear  ;
 
     }
 }

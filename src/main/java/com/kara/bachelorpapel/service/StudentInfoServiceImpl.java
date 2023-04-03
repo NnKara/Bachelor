@@ -21,23 +21,23 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         }
 
     @Override
-    public StudentInfo getStInfoByAm(String am) {
-        StudentInfo stInfo = studentInfoRepository.getStudentInfoByAm(am);
+    public StudentInfo getStInfoById(Integer id) {
+        StudentInfo stInfo = studentInfoRepository.getReferenceById(id);
         if(stInfo!=null) {
             return stInfo;
         }else{
-            throw new EntityNotFoundException(" Student-Info not found for am : " + am);
+            throw new EntityNotFoundException(" Student-Info not found for id : " + id);
         }
     }
 
     @Override
     public StudentInfo updateStInfo(StudentInfo studentInfo) {
-        StudentInfo dbStInfo=getStInfoByAm(studentInfo.getAm());
+        StudentInfo dbStInfo=getStInfoById(studentInfo.getStudentInfoId());
         if(dbStInfo==null){
-            throw new EntityNotFoundException(" Student-Info not found for am : " + studentInfo.getAm());
+            throw new EntityNotFoundException(" Student-Info not found for id : " + studentInfo.getStudentInfoId());
         }
-        if(studentInfo.getId()!=null){
-            dbStInfo.setId(studentInfo.getId());
+        if(studentInfo.getAm()!=null){
+            dbStInfo.setAm(studentInfo.getAm());
         }
         if(studentInfo.getEntryYear()!=null){
             dbStInfo.setEntryYear(studentInfo.getEntryYear());
@@ -52,9 +52,13 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     @Transactional
-    public void deleteStudentInfoByAM(String am) {
-        studentInfoRepository.deleteStudentInfoByAm(am);
+    public void deleteStInfo(User loggedInUser,Integer id) {
+        StudentInfo loggedInUsersStInfo=getStInfoById(id);
+        if(loggedInUsersStInfo!=null){
+            studentInfoRepository.delete(loggedInUsersStInfo);
+        }else {
+            throw new EntityNotFoundException("Student-Info doesn't exists!");
+        }
     }
-
 }
 

@@ -10,6 +10,7 @@ import lombok.Setter;
 public class StudentInfoDto {
 
 
+    private Integer studentInfoId;
     private String am;
     private String entryYear;
     private String graduationYear;

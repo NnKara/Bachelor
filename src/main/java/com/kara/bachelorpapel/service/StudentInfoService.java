@@ -6,8 +6,8 @@ import com.kara.bachelorpapel.entity.User;
 public interface StudentInfoService {
     void addStudentInfo(String am, String entryYear, String graduationYear, User loggedInUser);
 
-    StudentInfo getStInfoByAm(String am);
+    StudentInfo getStInfoById(Integer id);
     StudentInfo updateStInfo(StudentInfo studentInfo);
-    void deleteStudentInfoByAM(String am);
+    void deleteStInfo(User loggedInUser,Integer id);
 
 }

@@ -70,7 +70,6 @@ public class EducationController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         educationService.deleteEducation(educationId);
-        userRepository.save(loggedInUser);
         return "userProfile";
     }
 }

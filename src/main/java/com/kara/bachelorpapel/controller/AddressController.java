@@ -72,7 +72,6 @@ public class AddressController {
         User loggedInUser =getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         addressService.deleteAddress(addressId);
-        userRepository.save(loggedInUser);
         return "userProfile";
     }
 

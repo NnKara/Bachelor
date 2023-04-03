@@ -44,10 +44,7 @@ public class User  {
     private String lastname;
 
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private StudentInfo studentInfo;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE,orphanRemoval = true)
     private StudentInfo studentInfo;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)

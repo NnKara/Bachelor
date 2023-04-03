@@ -62,7 +62,6 @@ public class PhoneController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         phoneService.deletePhone(phoneId);
-        userRepository.save(loggedInUser);
         return "userProfile";
     }
 }

@@ -59,7 +59,6 @@ public class EmailController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         emailService.deleteEmail(emailId);
-        userRepository.save(loggedInUser);
         return "userProfile";
     }
 }

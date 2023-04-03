@@ -3,6 +3,7 @@ package com.kara.bachelorpapel.controller;
 
 import com.kara.bachelorpapel.entity.StudentInfo;
 import com.kara.bachelorpapel.entity.User;
+import com.kara.bachelorpapel.repository.StudentInfoRepository;
 import com.kara.bachelorpapel.repository.UserRepository;
 import com.kara.bachelorpapel.service.StudentInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,21 @@ public class StudentInfoController {
 
     @Autowired
     private StudentInfoServiceImpl studentInfoService;
+    @Autowired
+    private StudentInfoRepository studentInfoRepository;
 
     private User getLoggedInUser() {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();
         return userRepository.findByUsername(username);
     }
+
+//    @GetMapping("/userProfile")
+//    public String showUserProfile(Model model) {
+//        // Add necessary data to the model
+//        return "userProfile.html"; // The actual name of your HTML file
+//    }
+
 
 
     @PostMapping("/add")
@@ -38,31 +48,30 @@ public class StudentInfoController {
         return "addInfoProfile";
     }
 
-    @GetMapping("/update/{am}")
-    public String updateStInfo(@PathVariable(value="am") String am, Model model){
+    @GetMapping("/update/{id}")
+    public String updateStInfo(@PathVariable(value="id") Integer id, Model model){
         User loggedInUser=getLoggedInUser();
         model.addAttribute("user",loggedInUser);
-        StudentInfo studentInfo=studentInfoService.getStInfoByAm(am);
+        StudentInfo studentInfo=studentInfoService.getStInfoById(id);
         model.addAttribute("studentInfo",studentInfo);
         return "updateStudentInfo";
     }
 
-    @PostMapping("/update/{am}")
-    public String updateStInfo(@PathVariable(value = "am") String am, @ModelAttribute("studentInfo") StudentInfo studentInfo, Model model){
+    @PostMapping("/update/{id}")
+    public String updateStInfo(@PathVariable(value = "id") Integer id, @ModelAttribute("studentInfo") StudentInfo studentInfo, Model model){
         User loggedInUser=getLoggedInUser();
         model.addAttribute("user",loggedInUser);
-        studentInfo.setAm(am);
+        studentInfo.setStudentInfoId(id);
         studentInfoService.updateStInfo(studentInfo);
         return "userProfile";
     }
 
 
     @PostMapping("/delete")
-    public String deleteUsersStudentInfo(@RequestParam("am") String am, Model model) {
+    public String deleteUsersStInfo(@RequestParam("studentInfo") Integer stInfoId, Model model) {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
-        studentInfoService.deleteStudentInfoByAM(am);
-        //userRepository.save(loggedInUser);
-        return "userProfile";
+        studentInfoService.deleteStInfo(loggedInUser,stInfoId);
+        return "redirect:/user";
     }
 }
