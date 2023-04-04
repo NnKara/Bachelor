@@ -3,6 +3,7 @@ package com.kara.bachelorpapel.controller;
 import com.kara.bachelorpapel.dto.UserDto;
 import com.kara.bachelorpapel.repository.UserRepository;
 import com.kara.bachelorpapel.service.UserService;
+import com.kara.bachelorpapel.statistic.StudentAnalytics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,24 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StudentAnalytics studentAnalytics;
+
     @GetMapping("/users")
     public String  getAllUsers(Model model){
         List<UserDto> user=userService.findAllUsers();
         model.addAttribute("user",user);
         return "adminHomePage";
+    }
+
+    @GetMapping("/users/analytics")
+    public String getAvgYearsToJob(Model model) {
+        List<UserDto> users = userService.findAllUsers();
+        double avgYears = studentAnalytics.getAvgYearsToFindJob(users);
+        model.addAttribute("avgYearsToJob", avgYears);
+        int numOfStudents = studentAnalytics.getNumContinuedStudies(users);
+        model.addAttribute("numOfStContinuedStudies", numOfStudents);
+        return "studentAnalytics";
     }
 
     @DeleteMapping("delete/{id}")

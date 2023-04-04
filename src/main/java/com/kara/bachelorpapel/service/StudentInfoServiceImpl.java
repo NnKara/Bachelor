@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class StudentInfoServiceImpl implements StudentInfoService {
 
@@ -31,6 +33,11 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
+    public List<StudentInfo> getAllStInfo() {
+        return studentInfoRepository.findAll();
+    }
+
+    @Override
     public StudentInfo updateStInfo(StudentInfo studentInfo) {
         StudentInfo dbStInfo=getStInfoById(studentInfo.getStudentInfoId());
         if(dbStInfo==null){
@@ -48,6 +55,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         studentInfoRepository.save(dbStInfo);
         return dbStInfo;
     }
+
+
 
 
     @Override

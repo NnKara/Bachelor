@@ -60,6 +60,6 @@ public class ExperienceController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         experienceService.deleteExperience(experienceId);
-        return "updateExperience";
+        return "userProfile";
     }
 }

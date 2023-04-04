@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,11 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
+    public List<Experience> getAllExp() {
+        return experienceRepository.findAll();
+    }
+
+    @Override
     public Experience updateExp(Experience experience) {
         Experience dbExp=getExById(experience.getExperienceId());
         if(dbExp==null){
@@ -58,8 +64,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public void deleteExperience(Integer id) {
-        Optional<Experience> experienceToDelete=experienceRepository.findById(id);
-        if(experienceToDelete.isPresent()){
+        Experience experienceToDelete=getExById(id);
+        if(experienceToDelete!=null){
             experienceRepository.deleteById(id);
         }
         else {
