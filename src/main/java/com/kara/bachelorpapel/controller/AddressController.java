@@ -26,8 +26,6 @@ public class AddressController {
     @Autowired
     private AddressServiceImpl addressService;
 
-//    @Autowired
-//    private AddressValidator addressValidator;
 
 
     private User getLoggedInUser() {
