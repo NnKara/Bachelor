@@ -3,6 +3,7 @@ package com.kara.bachelorpapel.controller;
 import com.kara.bachelorpapel.converter.UserConverter;
 import com.kara.bachelorpapel.dto.UserDto;
 import com.kara.bachelorpapel.service.UserServiceImpl;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,13 +35,22 @@ public class UserRegistrationController {
     }
 
 
-    @PostMapping
+    @PostMapping("/registration")
     public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "registration";
         }
-        userService.save(userDto);
-        return "login";
+
+        try {
+            userService.save(userDto);
+            return "login";
+        } catch (EntityExistsException e) {
+            String errorMessage = "Username is already taken. Please choose a different username.";
+            model.addAttribute("errorMessage", errorMessage);
+            return "registration";
+        }
     }
+
+
 
 }

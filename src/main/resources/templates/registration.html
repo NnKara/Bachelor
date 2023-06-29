@@ -11,16 +11,17 @@
 </head>
 <body>
 
-<!-- create navigation bar ( header) -->
+<!-- create navigation bar (header) -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed"
                     data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                     aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#" th:href="@{/login}">Πανεπιστήμιο Πελοποννήσου</a>
         </div>
@@ -35,39 +36,41 @@
         <div class="col-md-6 col-md-offset-3">
 
             <!-- success message -->
-            <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered!
-                </div>
+            <div th:if="${param.success}" class="alert alert-info">
+                You've successfully registered!
             </div>
+            <div th:if="${errorMessage}" class="alert alert-danger">
+                <p th:text="${errorMessage}"></p>
+            </div>
+
             <h1>Registration</h1>
             <form th:action="@{/registration}" method="post" class="form" th:object="${user}">
                 <div class="form-group">
-                    <label class="control-label" for="firstname"> First Name </label>
+                    <label class="control-label" for="firstname">First Name</label>
                     <input type="text" id="firstname" class="form-control" th:field="*{firstname}"
-                           placeholder="Enter First Name"
-                           required autofocus="autofocus"/>
+                           placeholder="Enter First Name" required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="lastname"> Last Name </label> <input
-                        type="text" id="lastname" class="form-control" th:field="*{lastname}"
-                        placeholder="Enter Last Name"
-                        required autofocus="autofocus"/>
+                    <label class="control-label" for="lastname">Last Name</label>
+                    <input type="text" id="lastname" class="form-control" th:field="*{lastname}"
+                           placeholder="Enter Last Name" required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="username"> Username </label>
-                    <input
-                            type="text" id="username" class="form-control" th:field="*{username}" required
-                            placeholder="Enter Username"
-                            autofocus="autofocus"/>
+                    <label class="control-label" for="username">Username</label>
+                    <input type="text" id="username" class="form-control" th:field="*{username}"
+                           placeholder="Enter Username" required autofocus="autofocus"/>
+                    <!-- Display validation errors -->
+                    <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger">
+                        <p th:errors="*{username}"></p>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="password"> Password </label>
-                    <input
-                            id="password" class="form-control" type="password" placeholder="Enter password"
-                            th:field="*{password}" required autofocus="autofocus"/>
+                    <label class="control-label" for="password">Password</label>
+                    <input id="password" class="form-control" type="password" placeholder="Enter password"
+                           th:field="*{password}" required autofocus="autofocus"/>
                 </div>
 
                 <div class="form-group">
@@ -80,29 +83,3 @@
 </div>
 </body>
 </html>
-
-
-<!--.myBox {-->
-<!--width: 100%;-->
-<!--height: 100%;-->
-<!--padding: 10px;-->
-<!--border:1px solid #000;-->
-<!--border-radius: 10px;-->
-<!--box-shadow: 0px 2px 2px 2px black;-->
-<!--background: white;-->
-<!--}-->
-
-<!--@media screen and (min-width: 600px) {-->
-<!--.myBox {-->
-<!--text-align: center;-->
-<!--justify-context: center;-->
-<!--margin:auto;-->
-<!--width: 50%;-->
-<!--height: 50%;-->
-<!--padding: 10px;-->
-<!--border:1px solid #000;-->
-<!--border-radius: 10px;-->
-<!--box-shadow: 0px 2px 2px 2px black;-->
-<!--background: white;-->
-<!--}-->
-<!--}-->
