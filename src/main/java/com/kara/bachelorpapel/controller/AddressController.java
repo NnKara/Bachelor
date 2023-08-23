@@ -36,13 +36,15 @@ public class AddressController {
 
     @PostMapping("/add")
     public String addUsersAddress(@RequestParam("addressType") String addressType,
-                                @RequestParam("country") @NotBlank @Size(max = 2) String country,
-                                @RequestParam("city") String city,
-                                @RequestParam("postalCode") String postalCode,
-                                @RequestParam("number") String number,
-                                @RequestParam("street") String street ) {
+                                  @RequestParam("country") @NotBlank @Size(max = 2) String country,
+                                  @RequestParam("city") String city,
+                                  @RequestParam("postalCode") String postalCode,
+                                  @RequestParam("number") String number,
+                                  @RequestParam("street") String street,
+                                  Model model) {
         User loggedInUser = getLoggedInUser();
         addressService.saveNewAddress(street, number, postalCode, city, country, loggedInUser, addressType);
+        model.addAttribute("successMessage", "Address added successfully!");
         return "addInfoProfile";
     }
 
@@ -57,19 +59,24 @@ public class AddressController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateAddress(@PathVariable(value = "id") Integer id,@ModelAttribute("address") Address address,Model model){
-        User loggedInUser=getLoggedInUser();
-        model.addAttribute("user",loggedInUser);
+    public String updateAddress(@PathVariable(value = "id") Integer id,
+                                @ModelAttribute("address") Address address,
+                                Model model) {
+        User loggedInUser = getLoggedInUser();
         address.setAddressId(id);
         addressService.updateAddress(address);
+        model.addAttribute("successMessage", "Address Updated Successfully!");
+        model.addAttribute("user", loggedInUser);
         return "userProfile";
     }
+
 
     @PostMapping("/delete")
     public String deleteUsersAddress(@RequestParam("address") Integer addressId, Model model) {
         User loggedInUser =getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         addressService.deleteAddress(addressId);
+        model.addAttribute("successMessage", "Address Deleted Successfully!");
         return "userProfile";
     }
 

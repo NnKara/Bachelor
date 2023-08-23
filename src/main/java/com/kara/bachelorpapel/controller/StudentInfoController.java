@@ -31,11 +31,6 @@ public class StudentInfoController {
         return userRepository.findByUsername(username);
     }
 
-//    @GetMapping("/userProfile")
-//    public String showUserProfile(Model model) {
-//        // Add necessary data to the model
-//        return "userProfile.html"; // The actual name of your HTML file
-//    }
 
 
 
@@ -43,8 +38,13 @@ public class StudentInfoController {
     public String addStudentInfo(@RequestParam("am") String am,
                                  @RequestParam("entryYears") String entryYear,
                                  @RequestParam("graduationYears") String graduationYear, Model model) {
-        User loggedInUser =getLoggedInUser();
-        studentInfoService.addStudentInfo(am, entryYear, graduationYear, loggedInUser);
+        try {
+            User loggedInUser = getLoggedInUser();
+            studentInfoService.addStudentInfo(am, entryYear, graduationYear, loggedInUser);
+            model.addAttribute("successMessage", "Student-Info Added Successfully!");
+        }catch(RuntimeException e) {
+            model.addAttribute("errorMessage",e.getMessage());
+        }
         return "addInfoProfile";
     }
 
@@ -63,6 +63,7 @@ public class StudentInfoController {
         model.addAttribute("user",loggedInUser);
         studentInfo.setStudentInfoId(id);
         studentInfoService.updateStInfo(studentInfo);
+        model.addAttribute("successMessage", "Student-Info Updated Successfully!");
         return "userProfile";
     }
 
@@ -72,6 +73,7 @@ public class StudentInfoController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         studentInfoService.deleteStInfo(loggedInUser,stInfoId);
+        model.addAttribute("successMessage", "Student-Info Deleted Successfully!");
         return "redirect:/user";
     }
 }

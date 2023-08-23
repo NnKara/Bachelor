@@ -35,8 +35,9 @@ public class UserRegistrationController {
     }
 
 
-    @PostMapping("/registration")
-    public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+    @PostMapping
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto,
+                                      BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "registration";
         }
@@ -45,7 +46,7 @@ public class UserRegistrationController {
             userService.save(userDto);
             return "login";
         } catch (EntityExistsException e) {
-            String errorMessage = "Username is already taken. Please choose a different username.";
+            String errorMessage = "Username is already taken! Please choose a different username.";
             model.addAttribute("errorMessage", errorMessage);
             return "registration";
         }

@@ -32,9 +32,11 @@ public class ExperienceController {
     public String addExperience(@RequestParam("company") String company,
                                 @RequestParam("position") String position,
                                 @RequestParam("startDate") String startDate,
-                                @RequestParam("endDate") String endDate) {
+                                @RequestParam("endDate") String endDate,
+                                Model model) {
         User loggedInUser = getLoggedInUser();
         experienceService.addNewExperience(company, position, startDate, endDate, loggedInUser);
+        model.addAttribute("successMessage", "Experience Added Successfully!");
         return "addInfoProfile";
     }
     @GetMapping("/update/{id}")
@@ -52,6 +54,7 @@ public class ExperienceController {
         model.addAttribute("user",loggedInUser);
         experience.setExperienceId(id);
         experienceService.updateExp(experience);
+        model.addAttribute("successMessage", "Experience Updated Successfully!");
         return "userProfile";
     }
 
@@ -60,6 +63,7 @@ public class ExperienceController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         experienceService.deleteExperience(experienceId);
+        model.addAttribute("successMessage", "Experience Deleted Successfully!");
         return "userProfile";
     }
 }

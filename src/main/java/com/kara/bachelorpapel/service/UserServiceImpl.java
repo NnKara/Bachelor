@@ -39,21 +39,22 @@ public class UserServiceImpl implements UserService {
         User newUser=userConverter.dtoToEntity(userDto);
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        Role role = checkRoleExist();
-        if (role == null) {
-            role = new Role();
+//        Role role = checkRoleExist();
+//        if (role == null) {
+            Role role = new Role();
             role.setName("ROLE_USER");
-            role = roleRepository.save(role);
-        }
+//            role = roleRepository.save(role);
+//        }
         newUser.setRoles(List.of(role));
         userRepository.save(newUser);
         }
 
-    private Role checkRoleExist(){
-        Role role=new Role();
-        role.setName("ROLE_USER");
-        return roleRepository.save(role);
-    }
+
+//    private Role checkRoleExist(){
+//        Role role=new Role();
+//        role.setName("ROLE_USER");
+//        return roleRepository.save(role);
+//    }
 
     @Override
     public List<UserDto> findAllUsers() {

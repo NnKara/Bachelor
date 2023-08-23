@@ -39,11 +39,13 @@ public class EducationController {
                                     @RequestParam("title") String title,
                                     @RequestParam("entryYear") String entryYear,
                                     @RequestParam("studyCountry") String country,
-                                    @RequestParam("graduationYear") String graduationYear) {
+                                    @RequestParam("graduationYear") String graduationYear,
+                                    Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User loggedInUser = userRepository.findByUsername(username);
         educationService.addNewEducation(entryYear, graduationYear, university, department, loggedInUser, educationLevel, title, country);
+        model.addAttribute("successMessage", "Education Added Successfully!");
         return "addInfoProfile";
     }
 
@@ -62,6 +64,7 @@ public class EducationController {
         model.addAttribute("user",loggedInUser);
         education.setEducationId(id);
         educationService.updateEducation(education);
+        model.addAttribute("successMessage", "Education Updated Successfully!");
         return "userProfile";
     }
 
@@ -70,6 +73,7 @@ public class EducationController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         educationService.deleteEducation(educationId);
+        model.addAttribute("successMessage", "Education Deleted Successfully!");
         return "userProfile";
     }
 }

@@ -30,11 +30,15 @@ public class EmailController {
 
     @PostMapping("/add")
     public String addUsersEmail(@RequestParam("email") String email,
-                                @RequestParam("emailType") String emailType) {
+                                @RequestParam("emailType") String emailType,
+                                Model model) {
         User loggedInUser = getLoggedInUser();
         emailService.addEmailWithType(email, loggedInUser, emailType);
+        model.addAttribute("successMessage", "E-mail Added Successfully!");
         return "addInfoProfile";
     }
+
+
 
     @GetMapping("/update/{id}")
     public String updateEmail(@PathVariable(value="id") Integer id, Model model){
@@ -49,6 +53,7 @@ public class EmailController {
     public String updateEmail(@PathVariable(value = "id") Integer id, @ModelAttribute("email") Email email, Model model){
         User loggedInUser=getLoggedInUser();
         model.addAttribute("user",loggedInUser);
+        model.addAttribute("successMessage", "E-mail Updated Successfully!");
         email.setEmailId(id);
         emailService.updateEmail(email);
         return "userProfile";
@@ -59,6 +64,7 @@ public class EmailController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         emailService.deleteEmail(emailId);
+        model.addAttribute("successMessage", "E-mail Deleted Successfully!");
         return "userProfile";
     }
 }

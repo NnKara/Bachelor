@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kara.bachelorpapel.enums.AddressType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -43,7 +42,7 @@ public class Address {
 
     @Column(name = "City")
     @NotBlank(message = "*Το πεδίο είναι υποχρεωτικό")
-    @Pattern(regexp = "^[a-zA-Zα-ωΑ-Ω]+$", message = "Η πόλη πρέπει να περιέχει μόνο γράμματα")
+//    @Pattern(regexp = "^[a-zA-Zα-ωΑ-Ω]+$", message = "Η πόλη πρέπει να περιέχει μόνο γράμματα")
     private String city;
 
 

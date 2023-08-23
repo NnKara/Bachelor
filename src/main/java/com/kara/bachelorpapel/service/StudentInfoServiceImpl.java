@@ -18,8 +18,12 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Override
     public void addStudentInfo(String am, String entryYear, String graduationYear, User loggedInUser) {
+        if(isThereStINFO(loggedInUser)) {
             StudentInfo newStudentInfo = new StudentInfo(am, entryYear, graduationYear, loggedInUser);
             studentInfoRepository.save(newStudentInfo);
+        }else{
+            throw new RuntimeException("Student Info Already Exists!");
+        }
         }
 
     @Override
@@ -29,6 +33,14 @@ public class StudentInfoServiceImpl implements StudentInfoService {
             return stInfo;
         }else{
             throw new EntityNotFoundException(" Student-Info not found for id : " + id);
+        }
+    }
+
+    public boolean isThereStINFO(User loggedInUser){
+        if(loggedInUser.getStudentInfo()!=null){
+            return false;
+        }else{
+            return true;
         }
     }
 

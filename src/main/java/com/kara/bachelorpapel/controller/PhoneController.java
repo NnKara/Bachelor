@@ -32,12 +32,15 @@ public class PhoneController {
 
     @PostMapping("/add")
     public String addUsersPhone(@RequestParam("phone") String phone,
-                                @RequestParam("phoneType") String phoneType) {
+                                @RequestParam("phoneType") String phoneType,
+                                Model model) {
 
         User loggedInUser = getLoggedInUser();
         phoneService.addPhone(phone, loggedInUser, phoneType);
+        model.addAttribute("successMessage", "Phone Added Successfully!");
         return "addInfoProfile";
     }
+
 
     @GetMapping("/update/{id}")
     public String updatePhone(@PathVariable(value="id") Integer id, Model model){
@@ -54,6 +57,7 @@ public class PhoneController {
         model.addAttribute("user",loggedInUser);
         phone.setPhoneId(id);
         phoneService.updatePhone(phone);
+        model.addAttribute("successMessage", "Phone Updated Successfully!");
         return "userProfile";
     }
 
@@ -62,6 +66,7 @@ public class PhoneController {
         User loggedInUser = getLoggedInUser();
         model.addAttribute("user", loggedInUser);
         phoneService.deletePhone(phoneId);
+        model.addAttribute("successMessage", "Phone Deleted Successfully!");
         return "userProfile";
     }
 }
