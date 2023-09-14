@@ -7,6 +7,7 @@ services:
       - "8080:8080"
     depends_on:
       - mysqldb
+
   mysqldb:
     image: "mysql:5.7"
     restart: always
@@ -15,8 +16,8 @@ services:
     command:
        --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - mysql-data:/var/lib/mysql
-
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: "bachelor"
       MYSQL_USER: "karamitosnikos"
