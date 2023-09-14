@@ -23,8 +23,6 @@ services:
       MYSQL_USER: "karamitosnikos"
       MYSQL_PASSWORD: "karamitosnikos"
       MYSQL_ROOT_PASSWORD: "karamitosnikos"
-      MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
-      MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
 
 volumes:
   mysql-data:
