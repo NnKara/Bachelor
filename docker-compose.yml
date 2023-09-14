@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   server:
     build: .
@@ -6,7 +6,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysqldb
+      mysqldb: 
+        condition: service_healthy
 
   mysqldb:
     image: "mysql:5.7"
@@ -23,6 +24,10 @@ services:
       MYSQL_USER: "karamitosnikos"
       MYSQL_PASSWORD: "karamitosnikos"
       MYSQL_ROOT_PASSWORD: "karamitosnikos"
+    healthcheck:
+      test: out=$$(mysqladmin ping -h localhost -P 3306 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
+      interval: 20s
+      retries: 5
 
 volumes:
   mysql-data:
