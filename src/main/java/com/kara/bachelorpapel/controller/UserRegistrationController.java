@@ -44,6 +44,8 @@ public class UserRegistrationController {
 
         try {
             userService.save(userDto);
+            String successMessage="You have registered successfully!";
+            model.addAttribute("successMessage",successMessage);
             return "login";
         } catch (EntityExistsException e) {
             String errorMessage = "Username is already taken! Please choose a different username.";

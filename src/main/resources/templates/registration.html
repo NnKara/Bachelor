@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+      xsi:schemaLocation="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Registration</title>
@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<!-- create navigation bar (header) -->
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -27,53 +27,56 @@
         </div>
     </div>
 </nav>
+<br>
+<br>
+<br>
 
-<br>
-<br>
-<!-- Create HTML registration form -->
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
 
-            <!-- success message -->
-            <div th:if="${param.success}" class="alert alert-info">
-                You've successfully registered!
+                    <div th:if="${param.success}" class="alert alert-info">
+                        You've successfully registered!
+                    </div>
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <p th:text="${errorMessage}"></p>
+                    </div>
+
+                    <h1 class="text-center">Registration</h1>
+                    <form th:action="@{/registration}" method="post" class="form" th:object="${user}">
+                        <div class="form-group">
+                            <label class="control-label" for="firstname">First Name</label>
+                            <input type="text" id="firstname" class="form-control" th:field="*{firstname}"
+                                   placeholder="Enter First Name" required autofocus="autofocus"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="lastname">Last Name</label>
+                            <input type="text" id="lastname" class="form-control" th:field="*{lastname}"
+                                   placeholder="Enter Last Name" required autofocus="autofocus"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="username">Username</label>
+                            <input type="text" id="username" class="form-control" th:field="*{username}"
+                                   placeholder="Enter Username" required autofocus="autofocus"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password</label>
+                            <input id="password" class="form-control" type="password" placeholder="Enter password"
+                                   th:field="*{password}" required autofocus="autofocus"/>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-success">Register</button>
+                            <span>Already have an account? <a href="/" th:href="@{/login}">Login here</a></span>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div th:if="${errorMessage}" class="alert alert-danger">
-                <p th:text="${errorMessage}"></p>
-            </div>
-
-            <h1>Registration</h1>
-            <form th:action="@{/registration}" method="post" class="form" th:object="${user}">
-                <div class="form-group">
-                    <label class="control-label" for="firstname">First Name</label>
-                    <input type="text" id="firstname" class="form-control" th:field="*{firstname}"
-                           placeholder="Enter First Name" required autofocus="autofocus"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="lastname">Last Name</label>
-                    <input type="text" id="lastname" class="form-control" th:field="*{lastname}"
-                           placeholder="Enter Last Name" required autofocus="autofocus"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="username">Username</label>
-                    <input type="text" id="username" class="form-control" th:field="*{username}"
-                           placeholder="Enter Username" required autofocus="autofocus"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="password">Password</label>
-                    <input id="password" class="form-control" type="password" placeholder="Enter password"
-                           th:field="*{password}" required autofocus="autofocus"/>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already have an account? <a href="/" th:href="@{/login}">Login here</a></span>
-                </div>
-            </form>
         </div>
     </div>
 </div>

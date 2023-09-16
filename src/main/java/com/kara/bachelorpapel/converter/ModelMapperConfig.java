@@ -1,4 +1,4 @@
-package com.kara.studentscareer.bachelorpapel.converter;
+package com.kara.bachelorpapel.converter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
