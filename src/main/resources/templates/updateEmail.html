@@ -51,7 +51,7 @@
         <tbody>
         <td><input type="email" id="email" name="email" class="form-control" th:field="*{userEmail}" required autofocus="autofocus"/></td>
         <td>
-            <select class="form-control" id="emailType" name="emailType" required>
+            <select class="form-select" id="emailType" name="emailType" required>
                 <option th:each="emailType : ${T(com.kara.bachelorpapel.enums.EmailType).values()}"
                         th:value="${emailType.name()}"
                         th:text="${emailType}"
