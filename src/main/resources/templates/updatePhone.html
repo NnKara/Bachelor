@@ -49,7 +49,7 @@
     <tbody>
     <td><input type="number" id="number" name="number" class="form-control" th:field="*{number}" required autofocus="autofocus"/></td>
     <td>
-      <select class="form-control" id="phoneType" name="phoneType" required>
+      <select class="form-select" id="phoneType" name="phoneType" required>
         <option th:each="phoneType : ${T(com.kara.bachelorpapel.enums.PhoneType).values()}"
                 th:value="${phoneType.name()}"
                 th:text="${phoneType}"

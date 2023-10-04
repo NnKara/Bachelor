@@ -60,7 +60,7 @@
     <td><input type="date" id="entryYear" name="entryYear" class="form-control" th:field="*{entryYear}" required autofocus="autofocus"/></td>
     <td><input type="date" id="graduationYear" name="graduationYear" class="form-control" th:field="*{graduationYear}" required autofocus="autofocus"/></td>
     <td>
-      <select class="form-control" id="educationLevel" name="educationLevel" required>
+      <select class="form-select" id="educationLevel" name="educationLevel" required>
         <option th:each="educationLevel : ${T(com.kara.bachelorpapel.enums.EducationLevel).values()}"
                 th:value="${educationLevel.name()}"
                 th:text="${educationLevel}"

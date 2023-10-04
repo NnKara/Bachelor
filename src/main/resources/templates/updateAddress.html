@@ -59,7 +59,7 @@
         <td><input type="text" id="city" name="city" class="form-control" th:field="*{city}" required autofocus="autofocus"/></td>
         <td><input type="text" id="country" name="country" class="form-control" th:field="*{country}" required autofocus="autofocus"/></td>
         <td>
-            <select class="form-control" id="addressType" name="addressType" required>
+            <select class="form-select" id="addressType" name="addressType" required>
                 <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
                         th:value="${addressType.name()}"
                         th:text="${addressType}"

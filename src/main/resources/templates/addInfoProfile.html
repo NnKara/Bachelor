@@ -88,7 +88,7 @@
                 <tbody>
                 <td><input type="email" id="email" name="email" class="form-control"  required autofocus="autofocus"/></td>
                 <td>
-                    <select class="form-control" id="emailType" name="emailType" required>
+                    <select class="form-select" id="emailType" name="emailType" required>
                         <option value="" disabled selected>Select E-mail Type</option>
                         <option th:each="emailType : ${T(com.kara.bachelorpapel.enums.EmailType).values()}"
                                 th:value="${emailType}"
@@ -121,7 +121,7 @@
                 <tbody>
                 <td><input type="phone" id="phone" name="phone" class="form-control"  required autofocus="autofocus"/></td>
                 <td>
-                    <select class="form-control" id="phoneType" name="phoneType" required>
+                    <select class="form-select" id="phoneType" name="phoneType" required>
                         <option value="" disabled selected>Select Phone Type</option>
                         <option th:each="phoneType : ${T(com.kara.bachelorpapel.enums.PhoneType).values()}"
                                 th:value="${phoneType}"
@@ -162,7 +162,7 @@
         <td><input type="text" id="city" name="city" class="form-control"  required autofocus="autofocus"/></td>
         <td><input type="text" id="country" name="country" class="form-control"  required autofocus="autofocus"/></td>
         <td>
-            <select class="form-control" id="addressType" name="addressType" required>
+            <select class="form-select" id="addressType" name="addressType" required>
                 <option value="" disabled selected>Select Address Type</option>
                 <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
                         th:value="${addressType}"
@@ -202,7 +202,7 @@
         <td><input type="date" id="entryYear" name="entryYear" class="form-control"  required autofocus="autofocus"/></td>
         <td><input type="date" id="graduationYear" name="graduationYear" class="form-control"   autofocus="autofocus"/></td>
         <td>
-            <select class="form-control" id="educationLevel" name="educationLevel" required>
+            <select class="form-select" id="educationLevel" name="educationLevel" required>
                 <option value="" disabled selected>Select Education Level</option>
                 <option th:each="educationLevel : ${T(com.kara.bachelorpapel.enums.EducationLevel).values()}"
                         th:value="${educationLevel}"
