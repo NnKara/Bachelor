@@ -5,6 +5,10 @@ services:
     restart: always
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/bachelor"
+      SPRING_DATASOURCE_USERNAME: "karamitosnikos"
+      SPRING_DATASOURCE_PASSWORD: "karamitosnikos"
     depends_on:
       mysqldb: 
         condition: service_healthy
