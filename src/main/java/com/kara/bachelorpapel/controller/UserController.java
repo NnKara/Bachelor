@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/user")
@@ -45,20 +48,33 @@ public class UserController {
     private AddressRepository addressRepository;
 
 
+
     @GetMapping
     public String showHomePage(Model model) {
         User user = getLoggedInUser();
         UserDto userDto = userConverter.entityToDto(user);
         model.addAttribute("user", userDto);
+
+        // Log the roles associated with the authenticated user
+        if (user != null) {
+            Set<String> roles = user.getRoles().stream()
+                    .map(role -> role.getName())
+                    .collect(Collectors.toSet());
+
+            System.out.println("User Roles: " + roles);
+        }
+
         return "userProfile";
     }
+
+
+
 
     private User getLoggedInUser() {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();
         return userRepository.findByUsername(username);
     }
-
 
     @GetMapping("/delete")
     public String deleteUsersEmails(Model model) {

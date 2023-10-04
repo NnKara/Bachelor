@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,29 +33,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDto userDto)  {
-        User userFromDb=userRepository.findByUsername(userDto.getUsername());
-        if(userFromDb!=null){
+        User userFromDb = userRepository.findByUsername(userDto.getUsername());
+        if (userFromDb != null) {
             throw new EntityExistsException("This user already exists!");
         }
-        User newUser=userConverter.dtoToEntity(userDto);
+
+        User newUser = userConverter.dtoToEntity(userDto);
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-//        Role role = checkRoleExist();
-//        if (role == null) {
-            Role role = new Role();
-            role.setName("ROLE_USER");
-//            role = roleRepository.save(role);
-//        }
-        newUser.setRoles(List.of(role));
-        userRepository.save(newUser);
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        if (userRole == null) {
+            userRole = new Role("ROLE_USER");
+            roleRepository.save(userRole);
         }
+        newUser.setRoles(Collections.singletonList(userRole));
+        userRepository.save(newUser);
+    }
 
 
-//    private Role checkRoleExist(){
-//        Role role=new Role();
-//        role.setName("ROLE_USER");
-//        return roleRepository.save(role);
-//    }
 
     @Override
     public List<UserDto> findAllUsers() {

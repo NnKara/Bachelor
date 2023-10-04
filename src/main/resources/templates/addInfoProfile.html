@@ -91,8 +91,8 @@
                     <select class="form-select" id="emailType" name="emailType" required>
                         <option value="" disabled selected>Select E-mail Type</option>
                         <option th:each="emailType : ${T(com.kara.bachelorpapel.enums.EmailType).values()}"
-                                th:value="${emailType}"
-                                th:text="${emailType.name}">
+                                th:value="${emailType.name()}"
+                                th:text="${emailType}">
                         </option>
                     </select>
 
@@ -124,8 +124,8 @@
                     <select class="form-select" id="phoneType" name="phoneType" required>
                         <option value="" disabled selected>Select Phone Type</option>
                         <option th:each="phoneType : ${T(com.kara.bachelorpapel.enums.PhoneType).values()}"
-                                th:value="${phoneType}"
-                                th:text="${phoneType.name}">
+                                th:value="${phoneType.name()}"
+                                th:text="${phoneType}">
                         </option>
                     </select>
                 </td>
@@ -165,8 +165,8 @@
             <select class="form-select" id="addressType" name="addressType" required>
                 <option value="" disabled selected>Select Address Type</option>
                 <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
-                        th:value="${addressType}"
-                        th:text="${addressType.name}">
+                        th:value="${addressType.name()}"
+                        th:text="${addressType}">
                 </option>
             </select>
         </td>
@@ -205,8 +205,8 @@
             <select class="form-select" id="educationLevel" name="educationLevel" required>
                 <option value="" disabled selected>Select Education Level</option>
                 <option th:each="educationLevel : ${T(com.kara.bachelorpapel.enums.EducationLevel).values()}"
-                        th:value="${educationLevel}"
-                        th:text="${educationLevel.name}">
+                        th:value="${educationLevel.name()}"
+                        th:text="${educationLevel}">
                 </option>
             </select>
         </td>
@@ -253,7 +253,7 @@
         <thead class="table-dark">
         <tr>
             <th>A-M</th>
-            <th>Entry Year</th>
+            <th>Entry Date</th>
             <th>Graduation Date</th>
         </tr>
         </thead>

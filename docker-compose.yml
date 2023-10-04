@@ -10,7 +10,7 @@ services:
       SPRING_DATASOURCE_USERNAME: "karamitosnikos"
       SPRING_DATASOURCE_PASSWORD: "karamitosnikos"
     depends_on:
-      mysqldb: 
+      mysqldb:
         condition: service_healthy
 
   mysqldb:
@@ -19,8 +19,7 @@ services:
     ports:
       - "3307:3306"
     command:
-       --character-set-server=utf8mb4 
-       --collation-server=utf8mb4_unicode_ci
+      --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
       - ./mysql-data:/var/lib/mysql

@@ -22,14 +22,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
+                .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/registration").permitAll()
                                 .requestMatchers("/**").permitAll()
                                 .requestMatchers("/user").permitAll()
-                                .requestMatchers("/user/**").permitAll())
-
+                                .requestMatchers("/user/**").permitAll()
+                )
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
@@ -44,6 +44,8 @@ public class SecurityConfig {
                 );
         return http.build();
     }
+
+
     @Bean
     public static BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -51,10 +53,8 @@ public class SecurityConfig {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
 
 }

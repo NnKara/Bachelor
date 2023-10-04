@@ -23,6 +23,12 @@ public class CustomerErrorPage implements ErrorController {
             else if(statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error-403";
             }
+            else if(statusCode == HttpStatus.REQUEST_TIMEOUT.value()){
+                return "error-408";
+            }
+            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()){
+                return "error-500";
+            }
         }
         return "error";
     }

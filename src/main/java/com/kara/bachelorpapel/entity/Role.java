@@ -1,7 +1,10 @@
 package com.kara.bachelorpapel.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import java.util.List;
@@ -21,11 +24,11 @@ public class Role {
 
     private String name;
 
-    public Role(String name) {
-       super();
-        this.name = name;
-    }
-
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
+    public Role(String name) {
+        super();
+        this.name = name;
+    }
 }
