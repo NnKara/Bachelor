@@ -29,7 +29,7 @@
      .dropdown {
     position: relative;
     display: inline-block;
-    margin-left: auto; /* Add this line to align the dropdown to the right */
+    margin-left: auto;
 }
 
 .dropbtn {
@@ -46,7 +46,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    right: 0; /* Add this line to align the dropdown content to the right */
+    right: 0;
 }
 
 .dropdown-content a {
@@ -62,6 +62,52 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.custom-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .custom-table th, .custom-table td {
+        width: auto;
+        text-align: center;
+    }
+    .btn-group-education form button {
+        padding: 1rem 1rem;
+        font-size: 15px;
+        width: 150px;
+    }
+    .btn-group-address form button {
+       padding: 1rem 1rem;
+        font-size: 15px;
+        width: 150px;
+    }
+
+    .btn-group-address form button.delete-button {
+        padding: 0.2rem 0.5rem;
+        width: 150px;
+        margin-right: 0px;
+    }
+    .btn-group-address form button.edit-button {
+        padding: 0.2rem 0.5rem;
+        width: 150px;
+        margin-right: 0px;
+         margin-bottom: 5px;
+    }
+    .btn-group-education form button.delete-button {
+        padding: 0.2rem 0.5rem;
+        width: 150px;
+        margin-right: 0px;
+    }
+
+    .btn-group-education form button.edit-button {
+        padding: 0.2rem 0.5rem;
+        width: 150px;
+        margin-right: 0px;
+        margin-bottom: 5px;
+    }
+
+
+}
 
 </style>
 
@@ -75,18 +121,18 @@
     <p th:text="${errorMessage}"></p>
 </div>
 
-<!--<div sec:authorize="hasRole('ROLE_ADMIN')">5. User has role ADMIN.</div>-->
-
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div style = "position:relative; left:90px;">
     <a class="navbar-brand" href="#">Πανεπιστήμιο Πελοποννήσου</a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" style = "position:relative; left:90px;" >
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
@@ -95,18 +141,20 @@
                 <a class="nav-link" href="#" th:href="@{/user/add}">Add Info</a>
             </li>
         </ul>
-        <div style = "position:relative; left:950px;">
+        <div style = "position:relative; left:800px;">
+            <div style = "position:relative; left:10px;">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
             </li>
         </ul>
+            </div>
     </div>
     </div>
 </nav>
 
 <div class="container">
-    <h2> Welcome
+    <h2> Καλωσήρθες
         <td th:text="${user.firstname}"></td>
     </h2>
 </div>
@@ -115,13 +163,13 @@
 <body>
 <div class="container">
     <div class="row">
-        <h3> Personal Info </h3>
+        <h3> Προσωπικά Δεδομένα </h3>
     </div>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Όνομα</th>
+            <th>Επώνυμο</th>
         </tr>
         </thead>
         <tbody>
@@ -133,13 +181,13 @@
     </table>
     <br>
     <br>
-    <h3>List Of Emails</h3>
-    <table class="table table-striped table-bordered">
+    <h3>E-mails</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
             <th>Email</th>
-            <th>Type</th>
-            <th>Action</th>
+            <th>Τύπος</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
         <tbody>
@@ -148,14 +196,14 @@
             <td th:text="${email.emailType}"></td>
             <td>
                 <div class="btn-group" role="group">
-                <form th:action="@{/email/update/{id}(id=${email.emailId})}" method="get" th:object="${email}">
-                    <input type="hidden" name="email" th:value="${email.emailId}" />
-                    <button type="submit" class="btn btn-primary me-3">Edit</button>
-                </form>
-                <form method="post" action="/email/delete">
-                    <input type="hidden" name="email" th:value="${email.emailId}" />
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                    <form th:action="@{/email/update/{id}(id=${email.emailId})}" method="get" th:object="${email}">
+                        <input type="hidden" name="email" th:value="${email.emailId}" />
+                        <button type="submit" class="btn btn-primary me-3">Προσαρμογή</button>
+                    </form>
+                    <form method="post" action="/email/delete">
+                        <input type="hidden" name="email" th:value="${email.emailId}" />
+                        <button type="submit" class="btn btn-danger">Διαγραφή</button>
+                    </form>
                 </div>
             </td>
         </tr>
@@ -163,13 +211,13 @@
     </table>
     <br>
     <br>
-    <h3>List Of Phones</h3>
-    <table class="table table-striped table-bordered">
+    <h3>Τηλέφωνα</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
-            <th>Number</th>
-            <th>Type</th>
-            <th>Action</th>
+            <th>Αριθμός</th>
+            <th>Τύπος</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
         <tbody>
@@ -178,14 +226,14 @@
             <td th:text="${phone.phoneType}"></td>
             <td>
                 <div class="btn-group" role="group">
-                <form th:action="@{/phone/update/{id}(id=${phone.phoneId})}" method="get" th:object="${phone}">
-                    <input type="hidden" name="phone" th:value="${phone.phoneId}" />
-                    <button type="submit" class="btn btn-primary me-3">Edit</button>
-                </form>
-                <form method="post" action="/phone/delete">
-                    <input type="hidden" name="phone" th:value="${phone.phoneId}" />
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                    <form th:action="@{/phone/update/{id}(id=${phone.phoneId})}" method="get" th:object="${phone}">
+                        <input type="hidden" name="phone" th:value="${phone.phoneId}" />
+                        <button type="submit" class="btn btn-primary me-3">Προσαρμογή</button>
+                    </form>
+                    <form method="post" action="/phone/delete">
+                        <input type="hidden" name="phone" th:value="${phone.phoneId}" />
+                        <button type="submit" class="btn btn-danger">Διαγραφή</button>
+                    </form>
                 </div>
             </td>
         </tr>
@@ -193,20 +241,19 @@
     </table>
     <br>
     <br>
-    <h3>Address</h3>
-    <table class="table table-striped table-bordered">
+    <h3>Διευθύνσεις</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
-            <th>Street</th>
-            <th>Number</th>
-            <th>Postal Code</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Type</th>
-            <th>Action</th>
+            <th>Οδός</th>
+            <th>Αριθμός</th>
+            <th>Ταχυδρομικός Κώδικας</th>
+            <th>Πόλη</th>
+            <th>Χώρα</th>
+            <th>Τύπος</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
-        <tbody>
         <tbody>
         <tr th:each="address : ${user.addresses}">
             <td th:text="${address.street}"></td>
@@ -216,15 +263,15 @@
             <td th:text="${address.country}"></td>
             <td th:text="${address.addressType}"></td>
             <td>
-                <div class="btn-group" role="group">
-                <form th:action="@{/address/update/{id}(id=${address.addressId})}" method="get" th:object="${address}">
-                    <input type="hidden" name="address" th:value="${address.addressId}" />
-                    <button type="submit" class="btn btn-primary me-3">Edit</button>
-                </form>
-                <form method="post" action="/address/delete">
-                    <input type="hidden" name="address" th:value="${address.addressId}" />
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <div class="btn-group-address" role="group">
+                    <form th:action="@{/address/update/{id}(id=${address.addressId})}" method="get" th:object="${address}">
+                        <input type="hidden" name="address" th:value="${address.addressId}" />
+                        <button type="submit" class="btn btn-primary edit-button">Προσαρμογή</button>
+                    </form>
+                    <form method="post" action="/address/delete">
+                        <input type="hidden" name="address" th:value="${address.addressId}" />
+                        <button type="submit" class="btn btn-danger delete-button">Διαγραφή</button>
+                    </form>
                 </div>
             </td>
         </tr>
@@ -232,18 +279,18 @@
     </table>
     <br>
     <br>
-    <h3>Education</h3>
-    <table class="table table-striped table-bordered">
+    <h3>Εκπαίδευση</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
-            <th>University</th>
-            <th>Department</th>
-            <th>Title</th>
-            <th>Country</th>
-            <th>Entry Year</th>
-            <th>Graduation Year</th>
-            <th>Education Level</th>
-            <th>Action</th>
+            <th>Πανεπιστήμιο</th>
+            <th>Τμήμα</th>
+            <th>Τίτλος</th>
+            <th>Χώρα</th>
+            <th>Ημερομηνία Εισαγωγής</th>
+            <th>Ημερομηνία Αποφοίτησης</th>
+            <th>Επίπεδο Εκπαίδευσης</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
         <tbody>
@@ -256,14 +303,14 @@
             <td th:text="${education.graduationYear}"></td>
             <td th:text="${education.educationLevel}"></td>
             <td>
-                <div class="btn-group" role="group">
+                <div class="btn-group-education" role="group">
                     <form th:action="@{/education/update/{id}(id=${education.educationId})}" method="get" th:object="${education}">
                         <input type="hidden" name="education" th:value="${education.educationId}" />
-                        <button type="submit" class="btn btn-primary me-3">Edit</button>
+                        <button type="submit" class="btn btn-primary edit-button">Προσαρμογή</button>
                     </form>
                     <form method="post" action="/education/delete">
                         <input type="hidden" name="education" th:value="${education.educationId}" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger delete-button">Διαγραφή</button>
                     </form>
                 </div>
             </td>
@@ -272,15 +319,15 @@
     </table>
     <br>
     <br>
-    <h3>Experience</h3>
-    <table class="table table-striped table-bordered">
+    <h3>Εμπειρία</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
-            <th>Company</th>
-            <th>Position</th>
-            <th>Starting Date</th>
-            <th>End Date</th>
-            <th>Action</th>
+            <th>Εταιρεία</th>
+            <th>Θέση</th>
+            <th>Ημερομηνία Πρόσληψης</th>
+            <th>Ημερομηνία Αποχώρησης</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
         <tbody>
@@ -294,11 +341,11 @@
                     <form th:action="@{/experience/update/{id}(id=${experience.experienceId})}" method="get"
                           th:object="${experience}">
                         <input type="hidden" name="experience" th:value="${experience.experienceId}" />
-                        <button type="submit" class="btn btn-primary me-3">Edit</button>
+                        <button type="submit" class="btn btn-primary me-3">Προσαρμογή</button>
                     </form>
                     <form method="post" action="/experience/delete">
                         <input type="hidden" name="experience" th:value="${experience.experienceId}" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Διαγραφή</button>
                     </form>
                 </div>
             </td>
@@ -307,14 +354,14 @@
     </table>
     <br>
     <br>
-    <h3>Extra Info</h3>
-    <table class="table table-striped table-bordered">
+    <h3>Extra-Πληροφορίες ΠΑΠΕΛ</h3>
+    <table class="table table-striped table-bordered custom-table">
         <thead class="table-dark">
         <tr>
             <th>A-M</th>
-            <th>Entry Year</th>
-            <th>Graduation Year</th>
-            <th>Action</th>
+            <th>Ημερομηνία Εισαγωγής</th>
+            <th>Ημερομηνία Αποφοίτησης</th>
+            <th>Ενέργεια</th>
         </tr>
         </thead>
         <tbody>
@@ -326,12 +373,12 @@
                 <div class="btn-group" role="group">
                     <form th:action="@{/studentInfo/update/{id}(id=${studentInfo.studentInfoId})}" method="get" th:object="${studentInfo}">
                         <input type="hidden" name="studentInfo" th:value="${studentInfo.studentInfoId}" />
-                        <button type="submit" class="btn btn-primary me-3">Edit</button>
+                        <button type="submit" class="btn btn-primary me-3">Προσαρμογή</button>
                     </form>
 
                     <form method="post" action="/studentInfo/delete">
                         <input type="hidden" name="studentInfo" th:value="${studentInfo.studentInfoId}" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Διαγραφή</button>
                     </form>
                 </div>
             </td>

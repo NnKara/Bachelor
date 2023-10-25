@@ -38,21 +38,32 @@
     text-align: center;
 }
 
+.custom-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .custom-table th, .custom-table td {
+        width: auto;
+        text-align: center;
+    }
+
     </style>
 
 </head>
 <body>
 
-<!-- create navigation bar ( header) -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div style = "position:relative; left:70px;">
     <a class="navbar-brand" href="#">Πανεπιστήμιο Πελοποννήσου</a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item active" style = "position:relative; left:90px;">
                 <a class="nav-link" href="#" th:href="@{/user}">Home <span class="sr-only"></span></a>
         </ul>
     </div>
@@ -63,42 +74,42 @@
         <p th:text="${errorMessage}"></p>
     </div>
     <div style = "position:relative; left:-20px;">
+        <div style = "position:relative; left:-45px;">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
             </li>
         </ul>
+        </div>
     </div>
 </nav>
 
 <body>
-<div id="#email-section" style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add E-Mail</h3>
+<div id="email-section" style="background-color: #f8f9fa; padding: 30px;">
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη E-Mail</h3>
 </div>
-<div  class="row justify-content-center">
+<div class="row justify-content-center">
     <div class="col-lg-11">
         <form id="email-form" th:action="@{/email/add}" method="post" th:object="${email}">
             <table class="table table-striped table-bordered">
-                <thead class="table-dark">
+                <thead class="table-dark text-center">
                 <tr>
                     <th>Email</th>
-                    <th>Email Type</th>
+                    <th>Τύπος</th>
                 </tr>
                 </thead>
                 <tbody>
-                <td><input type="email" id="email" name="email" class="form-control"  required autofocus="autofocus"/></td>
+                <td><input type="email" id="email" name="email" class="form-control" required autofocus="autofocus"/></td>
                 <td>
-                    <select class="form-select" id="emailType" name="emailType" required>
-                        <option value="" disabled selected>Select E-mail Type</option>
+                    <select class="form-select text-center" id="emailType" name="emailType" required>
+                        <option value="" disabled selected>Επιλογή Τύπου E-mail</option>
                         <option th:each="emailType : ${T(com.kara.bachelorpapel.enums.EmailType).values()}"
-                                th:value="${emailType.name()}"
-                                th:text="${emailType}">
+                                th:value="${emailType}"
+                                th:text="${emailType.toString()}">
                         </option>
                     </select>
-
                 </td>
                 </tbody>
-
             </table>
             <input type="submit" value="INSERT" class="btn btn-primary"/>
         </form>
@@ -106,26 +117,26 @@
 </div>
 
 <div style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add Phone</h3>
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη Τηλεφώνου</h3>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-11">
         <form id="phone-section" th:action="@{/phone/add}" method="post" th:object="${phone}">
             <table class="table table-striped table-bordered">
-                <thead class="table-dark">
+                <thead class="table-dark text-center">
                 <tr>
-                    <th>Phone</th>
-                    <th>Phone Type</th>
+                    <th>Αριθμός</th>
+                    <th>Τύπος Τηλεφώνου</th>
                 </tr>
                 </thead>
                 <tbody>
                 <td><input type="phone" id="phone" name="phone" class="form-control"  required autofocus="autofocus"/></td>
                 <td>
-                    <select class="form-select" id="phoneType" name="phoneType" required>
-                        <option value="" disabled selected>Select Phone Type</option>
+                    <select class="form-select text-center" id="phoneType" name="phoneType" required>
+                        <option value="" disabled selected>Επιλογή Τύπου Τηλεφώνου</option>
                         <option th:each="phoneType : ${T(com.kara.bachelorpapel.enums.PhoneType).values()}"
-                                th:value="${phoneType.name()}"
-                                th:text="${phoneType}">
+                                th:value="${phoneType}"
+                                th:text="${phoneType.toString()}">
                         </option>
                     </select>
                 </td>
@@ -139,59 +150,60 @@
 
 
 <div style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add Address</h3>
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη Διεύθυνσης</h3>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-11">
-<form th:action="@{/address/add}" method="post" th:object="${address}">
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-        <tr>
-            <th>Street</th>
-            <th>Number</th>
-            <th>Postal Code</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Address Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <td><input type="text" id="street" name="street" class="form-control"  required autofocus="autofocus"/></td>
-        <td><input type="text" id="number" name="number" class="form-control"  required autofocus="autofocus" min="0"/></td>
-        <td><input type="text" id="postalCode" name="postalCode" class="form-control" required autofocus="autofocus"/></td>
-        <td><input type="text" id="city" name="city" class="form-control"  required autofocus="autofocus"/></td>
-        <td><input type="text" id="country" name="country" class="form-control"  required autofocus="autofocus"/></td>
-        <td>
-            <select class="form-select" id="addressType" name="addressType" required>
-                <option value="" disabled selected>Select Address Type</option>
-                <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
-                        th:value="${addressType.name()}"
-                        th:text="${addressType}">
-                </option>
-            </select>
-        </td>
-        </tbody>
-    </table>
-    <input type="submit" value="INSERT" class="btn btn-primary"/>
-</form>
+        <form th:action="@{/address/add}" method="post" th:object="${address}">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark text-center">
+                <tr>
+                    <th>Οδός</th>
+                    <th>Αριθμός</th>
+                    <th>Ταχυδρομικός Κώδικας</th>
+                    <th>Πόλη</th>
+                    <th>Χώρα</th>
+                    <th>Τύπος Διεύθυνσης</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td><input type="text" id="street" name="street" class="form-control" required autofocus="autofocus"/></td>
+                <td><input type="text" id="number" name="number" class="form-control" required autofocus="autofocus" min="0"/></td>
+                <td><input type="text" id="postalCode" name="postalCode" class="form-control" required autofocus="autofocus"/></td>
+                <td><input type="text" id="city" name="city" class="form-control" required autofocus="autofocus"/></td>
+                <td><input type="text" id="country" name="country" class="form-control" required autofocus="autofocus"/></td>
+                <td>
+                    <select class="form-select text-center" id="addressType" name="addressType" required>
+                        <option value="" disabled selected>Επιλογή Τύπου Διεύθυνσης</option>
+                        <option th:each="addressType : ${T(com.kara.bachelorpapel.enums.AddressType).values()}"
+                                th:value="${addressType}"
+                                th:text="${addressType.toString()}">
+                        </option>
+                    </select>
+                </td>
+                </tbody>
+            </table>
+            <input type="submit" value="INSERT" class="btn btn-primary"/>
+        </form>
     </div>
 </div>
+
 <div style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add Education</h3>
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη Εκπαίδευσης</h3>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-11">
 <form th:action="@{/education/add}" method="post" th:object="${education}">
     <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
         <tr>
-            <th>University</th>
-            <th>Department</th>
-            <th>Title</th>
-            <th>Country</th>
-            <th>Entry Date</th>
-            <th>Graduation Date</th>
-            <th>Education Level</th>
+            <th>Πανεπιστήμιο</th>
+            <th>Τμήμα</th>
+            <th>Τίτλος</th>
+            <th>Χώρα</th>
+            <th>Ημερομηνία Εισαγωγής</th>
+            <th>Ημερομηνία Αποφοίτησης</th>
+            <th>Επίπεδο Εκπαίδευσης</th>
         </tr>
         </thead>
         <tbody>
@@ -202,11 +214,11 @@
         <td><input type="date" id="entryYear" name="entryYear" class="form-control"  required autofocus="autofocus"/></td>
         <td><input type="date" id="graduationYear" name="graduationYear" class="form-control"   autofocus="autofocus"/></td>
         <td>
-            <select class="form-select" id="educationLevel" name="educationLevel" required>
-                <option value="" disabled selected>Select Education Level</option>
+            <select class="form-select " id="educationLevel" name="educationLevel" required>
+                <option value="" disabled selected>Επίλογη Επιπέδου Εκπαίδευσης</option>
                 <option th:each="educationLevel : ${T(com.kara.bachelorpapel.enums.EducationLevel).values()}"
-                        th:value="${educationLevel.name()}"
-                        th:text="${educationLevel}">
+                        th:value="${educationLevel}"
+                        th:text="${educationLevel.toString()}">
                 </option>
             </select>
         </td>
@@ -218,18 +230,18 @@
 </div>
 
 <div style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add Experience</h3>
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη Εμπειρίας</h3>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-11">
 <form th:action="@{/experience/add}" method="post" th:object="${experience}">
     <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
         <tr>
-            <th>Company</th>
-            <th>Position</th>
-            <th>Starting Date</th>
-            <th>End Date</th>
+            <th>Εταιρεία</th>
+            <th>Θέση</th>
+            <th>Ημερομηνία Πρόσληψης</th>
+            <th>Ημερομηνία Αποχώρησης</th>
         </tr>
         </thead>
         <tbody>
@@ -244,17 +256,17 @@
     </div>
 </div>
 <div style="background-color: #f8f9fa; padding: 20px;">
-    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Add Personal Student-Information</h3>
+    <h3 style="text-align: center; margin-top: 50px; margin-bottom: 20px;">Προσθήκη Πληροφοριών-ΠΑΠΕΛ</h3>
 </div>
 <div class="row justify-content-center">
     <div class="col-lg-11">
 <form th:action="@{/studentInfo/add}" method="post" th:object="${studentInfo}">
     <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
         <tr>
             <th>A-M</th>
-            <th>Entry Date</th>
-            <th>Graduation Date</th>
+            <th>Ημερομηνία Εισαγωγής</th>
+            <th>Ημερομηνία Αποφοίτησης</th>
         </tr>
         </thead>
         <tbody>
