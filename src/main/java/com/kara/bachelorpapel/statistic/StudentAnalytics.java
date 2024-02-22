@@ -12,6 +12,7 @@ import com.kara.bachelorpapel.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -85,9 +86,12 @@ public class StudentAnalytics {
                 }
             }
         }
-        return yearsToFindJobs.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+        return formatDouble(yearsToFindJobs.stream().mapToDouble(Double::doubleValue).average().orElse(0));
     }
-
+    public static double formatDouble(double value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(decimalFormat.format(value));
+    }
     public int getNumContinuedStudies(List<UserDto> users) {
         int count = 0;
         for (UserDto user : users) {
